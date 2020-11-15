@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Pagination } from 'components/Pagination';
-import { Vendor } from 'components/Vendor';
+import { VendorBrief } from 'components/Vendor';
 import type { IVendor } from 'store/vendor';
 
 import style from './style.scss';
@@ -28,10 +28,11 @@ export const VendorListContent: React.FC<IVendorListContentProps> = ({ list }) =
             key={item.id}
             className={style[i === arr.length - 1 ? 'item_last' : 'item']}
           >
-            <Vendor data={item} headingLevel={3} isArticle />
+            <VendorBrief data={item} />
           </li>
         ))}
       </ul>
+
       <Pagination amount={PAGINATION_SIZE} />
     </>
   );

@@ -2,11 +2,14 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { Button } from 'common/Button';
+import { ChevronIcon } from 'common/icons';
 
 import style from './style.scss';
 
 interface IVendorCheckInProps {
   className?: string;
+  isExpanded: boolean;
+  onToggle: () => void;
 }
 
 const mockedTimeList = [
@@ -20,30 +23,46 @@ const mockedTimeList = [
   '16:20',
 ];
 
-export const VendorCheckIn: React.FC<IVendorCheckInProps> = ({ className }) => {
+export const VendorCheckIn: React.FC<IVendorCheckInProps> = ({
+  className,
+  isExpanded,
+  onToggle,
+}) => {
   return (
-    <div className={classNames(style.root, className)}>
+    <div
+      className={classNames(style.root, className, {
+        [style.isExpanded]: isExpanded,
+      })}
+    >
       <div className={style.header}>
-        <p className={style.caption}>Свободное время на сегодня</p>
-        {/* TODO: add icon with chevron */}
+        <Button className={style.toggle} onClick={onToggle}>
+          <span className={style.toggleLabel}>Свободное время на сегодня</span>
+          <ChevronIcon className={style.chevron} />
+        </Button>
       </div>
-      <div className={style.timegrid}>
-        <ol className={style.list}>
-          {mockedTimeList.map((time) => (
-            <li key={time} className={style.item}>
-              <Button className={style.time}>
-                {time}
-              </Button>
-            </li>
-          ))}
-        </ol>
-      </div>
-      <Button
-        className={style.button}
-        isBlack
-      >
-        Записаться
-      </Button>
+
+      {isExpanded && (
+        <div className={style.collapsible}>
+          <div className={style.timeGrid}>
+            <ol className={style.list}>
+              {mockedTimeList.map((time) => (
+                <li key={time} className={style.item}>
+                  <Button className={style.time}>
+                    {time}
+                  </Button>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <Button
+            className={style.button}
+            isBlack
+          >
+            Записаться
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import noop from 'lodash/noop';
+import { noop } from 'lodash';
 
 import { ProcessEnum } from 'ts/constants';
 import { useSession } from 'store/session';

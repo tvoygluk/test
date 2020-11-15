@@ -5,7 +5,6 @@ import { IconButton } from 'common/IconButton';
 import { ChevronIcon, ProfileIcon, SignupIcon } from 'common/icons';
 import { LabelledButton } from 'components/LabelledButton';
 import { LoginButton } from 'components/LoginButton';
-import { SignupButton } from 'components/SignupButton';
 import { LogoutButton } from 'components/LogoutButton';
 import { Avatar } from 'common/Avatar';
 
@@ -99,21 +98,13 @@ export const MobileSidebarProfile: React.FC<IMobileSidebarProfileProps> = ({
                     setIsProfileExpanded(false);
                   }}
                 />
-                {/* TODO: ММ: SignupButton - временный дубликат LoginButton, для вывода SignupDialog */}
-                <SignupButton
-                  iconClassName={style.icon}
+                <LabelledButton
+                  className={style.dropdownButton}
                   labelClassName={style.dropdownLegend}
-                  onLogin={() => {
-                    setIsProfileExpanded(false);
-                  }}
-                />
-                {/* <LabelledButton */}
-                {/*  className={style.dropdownButton} */}
-                {/*  labelClassName={style.dropdownLegend} */}
-                {/*  label="Зарегистрироваться" */}
-                {/* > */}
-                {/*  <SignupIcon className={style.icon} /> */}
-                {/* </LabelledButton> */}
+                  label="Зарегистрироваться"
+                >
+                  <SignupIcon className={style.icon} />
+                </LabelledButton>
               </>
             )
           }

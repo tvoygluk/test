@@ -1,0 +1,11 @@
+$paddingX: 16px;
+
+.xMarged {
+  margin-left: $paddingX * -1;
+  margin-right: $paddingX * -1;
+}
+
+.xPadded {
+  padding-left: $paddingX;
+  padding-right: $paddingX;
+}

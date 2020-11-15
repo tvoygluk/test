@@ -1,5 +1,5 @@
 import React from 'react';
-import noop from 'lodash/noop';
+import { noop } from 'lodash';
 
 import { LogoutIcon } from 'common/icons';
 import { LabelledButton } from 'components/LabelledButton';

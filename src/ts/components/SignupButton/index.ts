@@ -1,1 +1,0 @@
-export { SignupButton } from './self';

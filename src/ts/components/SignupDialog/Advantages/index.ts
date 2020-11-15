@@ -1,1 +1,0 @@
-export { LoginDialogAdvantages } from './self';

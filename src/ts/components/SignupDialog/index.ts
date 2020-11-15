@@ -1,1 +1,0 @@
-export { SignupDialog } from './self';

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { ProcessEnum } from 'ts/constants';
-import { Vendor } from 'components/Vendor';
+import { VendorFull } from 'components/Vendor';
 import { useVendor } from 'store/vendor';
 
 import style from './style.scss';
@@ -39,7 +39,7 @@ export const VendorPage: React.FC = () => {
               <h1 className={style.heading}>
                 {`Салон ${currentVendor.name}`}
               </h1>
-              <Vendor className={style.content} data={currentVendor} />
+              <VendorFull className={style.content} data={currentVendor} />
             </>
           ) : (
             <p className={style.message}>Нет данных по выбранному салону</p>

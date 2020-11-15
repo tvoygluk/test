@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { TaglineItem } from './Item';
+import { TagListItem } from './Item';
 
 import style from './style.scss';
 
-interface ITaglineProps {
+interface ITagListProps {
   className?: string;
 }
 
@@ -13,14 +13,14 @@ type Tag = string;
 
 const mockedTags: Tag[] = ['Маникюр', 'Причёски', 'Брови', 'Лицо', 'Массаж'];
 
-export const Tagline: React.FC<ITaglineProps> = ({ className }) => {
+export const TagList: React.FC<ITagListProps> = ({ className }) => {
   const [activeTag, setActiveTag] = React.useState<Tag>('Маникюр');
 
   return (
     <div className={classNames(style.root, className)}>
       <div className={style.list}>
         {mockedTags.map((tag, i, arr) => (
-          <TaglineItem
+          <TagListItem
             key={tag}
             tag={tag}
             isActive={tag === activeTag}

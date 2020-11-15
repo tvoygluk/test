@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import { CHARS } from 'ts/constants';
 import { Button } from 'common/Button';
 import { MarkerIcon } from 'common/icons';
 
@@ -24,8 +25,11 @@ export const VendorGeography: React.FC<IVendorGeographyProps> = ({ className, da
   return (
     <div className={classNames(style.root, className)}>
       <span className={style.address}>{address}</span>
-      <span className={style.separator} role="separator">.</span>
+
+      <span className={style.separator} role="separator">{CHARS.DOT_SEPARATOR}</span>
+
       <span className={style.distance}>{distance}</span>
+
       <Button className={style.show}>
         <MarkerIcon className={style.marker} color="#1c76db" />
         Показать на карте

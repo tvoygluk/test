@@ -32,14 +32,6 @@ export const VendorList: React.FC<IVendorListProps> = ({ className }) => {
           Салоны рядом
         </h2>
 
-        {vendor.process.vendors === ProcessEnum.REQUESTED && (
-          <p>Загружаем данные...</p>
-        )}
-
-        {vendor.process.vendors === ProcessEnum.ERROR && (
-          <p>Не удалось загрузить данные</p>
-        )}
-
         <IconButton
           aria-label="Включить фильтр"
           onClick={() => {
@@ -49,6 +41,14 @@ export const VendorList: React.FC<IVendorListProps> = ({ className }) => {
           <FilterIcon />
         </IconButton>
       </div>
+
+      {vendor.process.vendors === ProcessEnum.REQUESTED && (
+        <p>Загружаем данные...</p>
+      )}
+
+      {vendor.process.vendors === ProcessEnum.ERROR && (
+        <p>Не удалось загрузить данные</p>
+      )}
 
       {vendor.process.vendors === ProcessEnum.SUCCESS && (
         <VendorListContent list={vendor.data.list} />

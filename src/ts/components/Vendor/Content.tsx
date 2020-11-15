@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { noop } from 'lodash';
 import { Link } from 'react-router-dom';
 
 import { IconButton } from 'common/IconButton';
@@ -12,23 +13,27 @@ import mockedServices from 'ts/mocks/vendor/services';
 import { VendorCheckIn } from './CheckIn';
 import { VendorGeography } from './Geography';
 import { VendorService } from './Service';
-import type { VendorHeadingLevelType } from './types';
 
 import img1x1 from './img/vendor-1@1x.jpg';
 import img1x2 from './img/vendor-1@2x.jpg';
 import img1x3 from './img/vendor-1@3x.jpg';
+import innerImg from './img/vendor-inner-1.png';
 import style from './style.scss';
 
 interface IVendorContentProps {
   data: IVendor;
   headingId?: string;
-  headingLevel?: VendorHeadingLevelType;
+  isCheckInExpaded?: boolean;
+  isInner?: boolean;
+  onCheckInToggle?: () => void;
 }
 
 export const VendorContent: React.FC<IVendorContentProps> = ({
   data,
   headingId,
-  headingLevel,
+  isCheckInExpaded = false,
+  isInner = false,
+  onCheckInToggle = noop,
 }) => {
   const {
     address,
@@ -55,27 +60,34 @@ export const VendorContent: React.FC<IVendorContentProps> = ({
     geoPositionLongitude,
   };
 
-  const renderLink = (children: React.ReactNode): React.ReactNode => (
+  const renderLink = (children: React.ReactNode) => (
     <Link className={style.link} to={`${ROUTES.VENDOR_ROOT}/${id}`}>
       {children}
     </Link>
   );
 
-  const renderHeading = () => {
-    if (!headingLevel) {
-      return (
-        <p className={style.title}>
-          {renderLink(name)}
-        </p>
-      );
+  const renderImage = () => {
+    const image = (
+      <Image
+        className={style.image}
+        alt={name}
+        srcList={srcList}
+        loading="lazy"
+        width="300"
+        height="165"
+      />
+    );
+
+    if (isInner) {
+      return image;
     }
 
-    if (headingLevel === 2) {
-      return (
-        <h2 className={style.title} id={headingId}>
-          {renderLink(name)}
-        </h2>
-      );
+    return renderLink(image);
+  };
+
+  const renderHeading = () => {
+    if (isInner) {
+      return <p className={style.title}>{name}</p>;
     }
 
     return (
@@ -87,18 +99,11 @@ export const VendorContent: React.FC<IVendorContentProps> = ({
 
   const serviceList = services.length > 0 ? services : mockedServices;
 
+  const srcList = isInner ? [innerImg] : [img1x1, img1x2, img1x3];
+
   return (
     <>
-      {renderLink(
-        <Image
-          className={style.image}
-          alt={name}
-          srcList={[img1x1, img1x2, img1x3]}
-          loading="lazy"
-          width="300"
-          height="165"
-        />,
-      )}
+      {renderImage()}
 
       <div className={style.header}>
         {renderHeading()}
@@ -111,7 +116,7 @@ export const VendorContent: React.FC<IVendorContentProps> = ({
         </div>
 
         <span className={style.reviews}>
-          {`Число отзывов: ${notes?.length ?? 0}`}
+          {`Отзывов: ${notes?.length ?? 0}`}
         </span>
 
         <HomeIcon className={style.home} />
@@ -135,19 +140,28 @@ export const VendorContent: React.FC<IVendorContentProps> = ({
       <VendorGeography className={style.geography} data={geographyData} />
 
       <div className={style.services}>
-        <p className={style.caption}>Услуги</p>
+        {isInner && (
+          <h2 className={style.servicesCaption}>Услуги</h2>
+        )}
+
         <ul className={style.list}>
-          {serviceList.map((item, i) => (
-            <VendorService
-              key={i}
-              className={style.service}
-              data={item}
-            />
+          {serviceList.map((item, i, arr) => (
+            <li
+              key={item.id}
+              className={style[i === arr.length - 1 ? 'lastService' : 'service']}
+            >
+              <VendorService data={item} isExtended={isInner} />
+            </li>
           ))}
         </ul>
       </div>
 
-      <VendorCheckIn className={style.checkin} />
+      {!isInner && (
+        <VendorCheckIn
+          isExpanded={isCheckInExpaded}
+          onToggle={onCheckInToggle}
+        />
+      )}
     </>
   );
 };

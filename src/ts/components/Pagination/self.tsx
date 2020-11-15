@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import noop from 'lodash/noop';
+import { noop } from 'lodash';
 
 import { PaginationEllipsis } from './Ellipsis';
 import { PaginationItem } from './Item';

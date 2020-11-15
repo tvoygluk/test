@@ -6,6 +6,11 @@ html.Page(lang='ru')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
     title LOOKAP
     link(rel='icon shortcut' href=require('../favicons/favicon.ico').default)
+    link(
+      rel='preload'
+      href=require('../ts/components/LogoImage/img/logo.svg').default
+      as='image'
+    )
     each fontWeight in [400, 500, 700]
       link(
         rel='preload',

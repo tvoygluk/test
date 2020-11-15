@@ -1,9 +1,8 @@
 @use "~scss/utils";
 
-$color-yellow: #ffc50f;
-$border-bottom: 1px solid utils.$color-black-alpha-01;
-$box-shadow: 0 5px 7px 0 utils.$color-black-alpha-01;
-$paddingX: 16px;
+._bordered {
+  border-bottom: 1px solid utils.$color-black-alpha-01;
+}
 
 .root {
   display: flex;
@@ -11,16 +10,7 @@ $paddingX: 16px;
   width: 300px;
   overflow: hidden;
   border-radius: 10px;
-  box-shadow: $box-shadow;
-}
-
-._bordered {
-  border-bottom: $border-bottom;
-}
-
-._xPadded {
-  padding-left: $paddingX;
-  padding-right: $paddingX;
+  box-shadow: 0 5px 7px 0 utils.$color-black-alpha-01;
 }
 
 .header {
@@ -32,18 +22,45 @@ $paddingX: 16px;
   padding: 16px;
 }
 
+.title {
+  margin-top: 0;
+  margin-bottom: 16px;
+  width: 100%;
+  font-weight: 700;
+  font-size: 16px;
+}
+
 .geography {
-  composes: _xPadded _bordered;
+  composes: xPadded from "./helpers.scss";
+  composes: _bordered;
 }
 
 .services {
-  composes: _xPadded _bordered;
+  composes: xPadded from "./helpers.scss";
+}
 
-  padding-top: 1.5rem;
+.servicesCaption {
+  @include utils.text-size-caption();
+
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+._service {
+  padding-top: 18px;
+  padding-bottom: 18px;
 }
 
 .service {
-  composes: _xPadded;
+  composes: xPadded from "./helpers.scss";
+  composes: _bordered _service;
+}
+
+.lastService {
+  composes: xPadded from "./helpers.scss";
+  composes: _service;
 }
 
 .image {
@@ -62,8 +79,7 @@ $paddingX: 16px;
 
 .list {
   composes: list from "~scss/scaffold.scss";
-  margin-left: $paddingX * -1;
-  margin-right: $paddingX * -1;
+  composes: xMarged from "./helpers.scss";
 }
 
 .reviews {
@@ -82,27 +98,10 @@ $paddingX: 16px;
   font-weight: 700;
   font-size: 20px;
   line-height: 20px;
-  color: $color-yellow;
+  color: utils.$color-gold;
 }
 
 .link {
   text-decoration: none;
   color: inherit;
-}
-
-.title {
-  margin-top: 0;
-  margin-bottom: 16px;
-  width: 100%;
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.caption {
-  @include utils.text-size-caption();
-
-  margin-top: 0;
-  margin-bottom: 0;
-  font-weight: 700;
-  text-transform: uppercase;
 }

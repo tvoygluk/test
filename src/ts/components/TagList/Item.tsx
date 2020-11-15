@@ -5,14 +5,14 @@ import { Button } from 'common/Button';
 
 import style from './style.scss';
 
-interface ITaglineItemProps {
+interface ITagListItemProps {
   tag: string;
   isActive: boolean;
   isLast: boolean;
   onClick: (tag: string) => void;
 }
 
-export const TaglineItem: React.FC<ITaglineItemProps> = ({
+export const TagListItem: React.FC<ITagListItemProps> = ({
   tag,
   isActive,
   isLast,

@@ -41,7 +41,6 @@ export const App: React.FC = () => {
         <div className={style.primaryColumn}>
           <div className={style.scrollBox}>
             <div className={style.scrollContent}>
-
               <AppHeader
                 className={style.header}
                 isMenuButtonDisabled={isNavMenuExpanded}
@@ -51,6 +50,9 @@ export const App: React.FC = () => {
               <AppFooter className={style.footer} />
               <Link to="/storybook">
                 <button style={{ width: 100 }}>To storybook</button>
+              </Link>
+              <Link to="/vendor/879106fa-3815-4c02-18d2-08d83c648921">
+                <button style={{ width: 100 }}>To vendor</button>
               </Link>
             </div>
           </div>

@@ -4,6 +4,9 @@ import { VENDOR_ACTION_TYPES as ACTIONS } from './actionTypes';
 import { vendorApi } from './api';
 import type { IVendor } from './types';
 
+import vendorByIdMock from 'ts/mocks/vendor/vendorById';
+import vendorsMock from 'ts/mocks/vendor/vendors';
+
 type VendorActionWithOneArg = (dispatch: Dispatch) => Promise<void>;
 
 export interface IVerdorctionCreator {
@@ -20,6 +23,13 @@ export const vendorActionCreator: IVerdorctionCreator = {
 
       try {
         const data = await vendorApi.getVendors() as IVendor[];
+
+        // STUB: mocked resolve
+        // const data = await new Promise((resolve) => {
+        //   globalThis.setTimeout(() => {
+        //     resolve(vendorsMock.data);
+        //   }, 1000);
+        // });
 
         dispatch({
           type: ACTIONS.GET_VENDROS.SUCCESS,
@@ -40,7 +50,14 @@ export const vendorActionCreator: IVerdorctionCreator = {
       });
 
       try {
-        const data = await vendorApi.getVendorById(id);
+        // const data = await vendorApi.getVendorById(id);
+
+        // STUB: mocked resolve
+        const data = await new Promise((resolve) => {
+          globalThis.setTimeout(() => {
+            resolve(vendorByIdMock.data);
+          }, 1000);
+        });
 
         dispatch({
           type: ACTIONS.GET_VENDOR_BY_ID.SUCCESS,

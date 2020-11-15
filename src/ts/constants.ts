@@ -19,3 +19,7 @@ export const ROUTES = {
   VENDOR_ROOT: `${PUBLIC_PATH}vendor`,
   VENDOR_ITEM: `${PUBLIC_PATH}vendor/:id`,
 } as const;
+
+export const CHARS = {
+  DOT_SEPARATOR: '·',
+} as const;

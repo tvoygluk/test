@@ -13,6 +13,7 @@ interface INote {
 
 export interface IVendorService {
   id: string;
+  description?: string[];
   discount?: number;
   duration: number;
   name: string;
