@@ -1,0 +1,22 @@
+@use "~scss/utils";
+
+.column {
+  $paddingY: 3rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: $paddingY;
+  padding-bottom: $paddingY;
+
+  @media (min-width: utils.$breakpoint-md-min) {
+    flex: 0 0 50%;
+  }
+}
+
+.caption {
+  @include utils.text-size-caption();
+
+  margin-top: 0;
+  margin-bottom: 0;
+}

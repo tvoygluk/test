@@ -1,0 +1,53 @@
+@use "~scss/utils";
+
+.root {
+  padding-top: 28px;
+  border-top: 1px solid utils.$color-mercury;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.textReview {
+  margin-bottom: 24px;
+  line-height: 20px;
+  color: utils.$color-gray;
+}
+
+.clientInfo {
+  line-height: 17px;
+  margin-bottom: 10px;
+}
+
+.clientName {
+  position: relative;
+  padding-right: 16px;
+
+  &::after {
+    content: ".";
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    top: -5px;
+    right: 9px;
+  }
+}
+
+.masterInfo {
+  margin-bottom: 18px;
+}
+
+.wrapServices {
+  display: flex;
+  margin: 0 0 33px -5px;
+  flex-wrap: wrap;
+}
+
+.stars {
+  justify-content: flex-start !important;
+  margin-bottom: 11px;
+}
+
+.service {
+  margin: 0 0 5px 5px;
+}

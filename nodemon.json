@@ -1,0 +1,6 @@
+{
+  "exec": "npm run",
+  "ext": "js,json",
+  "verbose": true,
+  "watch": ["./.env.local", "./webpack.config.js", "./babel.config.js", "./tsconfig.json"]
+}

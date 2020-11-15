@@ -1,0 +1,9 @@
+.root {
+  background-color: #fefefe;
+}
+
+.container {
+  composes: container from "~scss/scaffold.scss";
+  width: 100%;
+  max-width: 600px;
+}

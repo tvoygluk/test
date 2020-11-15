@@ -1,0 +1,12 @@
+---
+extends:
+  - stylelint-config-yialo/base
+  - stylelint-config-yialo/scss
+ignoreFiles:
+  - '*.html'
+  - '*.js'
+  - '*.jsx'
+  - '*.md'
+  - '*.ts'
+  - '*.tsx'
+  - ./dist/**

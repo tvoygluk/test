@@ -1,0 +1,73 @@
+@use "~scss/utils";
+@use "variables" as vars;
+
+$menuButtonSize: 24px;
+$paddingY: 12px;
+
+$contentMinHeight-mobile: $menuButtonSize;
+$сontentMinHeight-desktop: vars.$avatarSize;
+
+.root {
+  composes: padX from "~scss/scaffold.scss";
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: var(--size_paddingX);
+  align-items: center;
+  padding-top: $paddingY;
+  padding-bottom: $paddingY;
+  background-color: utils.$color-white;
+
+  @media (max-width: utils.$breakpoint-sm-max) {
+    grid-template-columns: auto 1fr;
+    justify-content: start;
+    min-height: $contentMinHeight-mobile + $paddingY * 2;
+  }
+
+  @media (min-width: utils.$breakpoint-md-min) {
+    grid-template-columns: auto auto 1fr;
+    min-height: $сontentMinHeight-desktop + $paddingY * 2;
+  }
+}
+
+.menuButton {
+  @media (max-width: utils.$breakpoint-sm-max) {
+    width: $menuButtonSize;
+  }
+
+  @media (min-width: utils.$breakpoint-md-min) {
+    display: none;
+  }
+}
+
+.logo {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: auto;
+}
+
+.owner {
+  @media (max-width: utils.$breakpoint-sm-max) {
+    display: none;
+  }
+
+  @media (min-width: utils.$breakpoint-md-min) {
+    align-self: stretch;
+    margin-top: -$paddingY;
+    margin-bottom: -$paddingY;
+    border-left: 1px solid utils.$color-header-border;
+    padding-top: $paddingY;
+    padding-bottom: $paddingY;
+    padding-left: var(--size_paddingX);
+  }
+}
+
+.userBar {
+  @media (max-width: utils.$breakpoint-sm-max) {
+    display: none;
+  }
+
+  @media (min-width: utils.$breakpoint-md-min) {
+    display: block;
+    margin-left: auto;
+  }
+}

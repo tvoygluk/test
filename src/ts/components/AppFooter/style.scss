@@ -1,0 +1,27 @@
+@use "~scss/utils";
+
+$color-background: #f9f9f9;
+
+.container {
+  composes: container padX from "~scss/scaffold.scss";
+}
+
+.copyright {
+  padding-top: 20px;
+  padding-bottom: 28px;
+  font-size: 12px;
+  line-height: 14px;
+  color: utils.$color-gray;
+}
+
+.list {
+  composes: list from "~scss/scaffold.scss";
+  display: flex;
+  justify-content: space-between;
+  padding-top: 28px;
+  padding-bottom: 30px;
+}
+
+.top {
+  background-color: $color-background;
+}

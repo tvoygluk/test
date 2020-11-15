@@ -1,0 +1,26 @@
+@use "~scss/utils";
+
+.root {
+  padding-top: 24px;
+}
+
+.sliderContainer {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: utils.$size-sm-container-maxWidth;
+}
+
+.vendors {
+  composes: container from "~scss/scaffold.scss";
+}
+
+.discounts {
+  composes: sliderContainer;
+  margin-bottom: 40px;
+}
+
+.tags {
+  composes: sliderContainer;
+  margin-bottom: 40px;
+}

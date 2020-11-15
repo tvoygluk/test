@@ -1,0 +1,1 @@
+export { AppFooterSublist } from './self';

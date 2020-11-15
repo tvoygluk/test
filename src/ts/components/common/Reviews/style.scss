@@ -1,0 +1,58 @@
+@use "~scss/utils";
+
+.root {
+  padding: 0 19px;
+  width: utils.$size-content-minWidth;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin: 0 0 20px 0;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+
+.grades {
+  display: flex;
+  flex-direction: column;
+}
+
+.commonInfo {
+  margin-bottom: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mainGrade {
+  font-weight: 500;
+  margin-right: 30px;
+  font-size: 55px;
+  line-height: 64px;
+  color: utils.$color-rating;
+}
+
+.starGrade {
+  padding-top: 10px;
+}
+
+.comments {
+  display: inline-block;
+  margin-top: 7px;
+  font-size: 14px;
+  line-height: 17px;
+  color: utils.$color-gray;
+}
+
+.gradeBlocks {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+
+.outStyle {
+  margin-bottom: 20px;
+}

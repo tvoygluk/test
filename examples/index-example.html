@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+
+    <script>
+      function RequestPost(path, content, onResponse, onError) {
+          const xhr = new XMLHttpRequest();
+          xhr.open("POST", path, true);
+          xhr.withCredentials = true;
+          xhr.setRequestHeader("accept", "text/plain");
+          xhr.setRequestHeader("Content-Type", "application/json");
+          xhr.onload = onResponse;
+          xhr.onerror = onError;
+          xhr.send(JSON.stringify(content));
+      };
+
+      function RequestGet(path, onResponse, onError) {
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", path, true);
+          xhr.withCredentials = true;
+          xhr.onload = onResponse;
+          xhr.onerror = onError;
+          xhr.send();
+      };
+    </script>
+
+    <script type="text/babel">
+      var AppointmentCreate = React.createClass({
+        getTimePart: function(part) {
+          var string = "" + part;
+          return (string.length < 2 ? "0":"") + string;
+        },
+
+        getTimeCurrent: function(minutes) {
+          var timeCurrent = new Date();
+          timeCurrent = new Date(timeCurrent.getTime() + minutes * 60 * 1000);
+          return timeCurrent.getFullYear() + "-"  + this.getTimePart(timeCurrent.getMonth() + 1) + "-" + this.getTimePart(timeCurrent.getDate()) + "T" + this.getTimePart(timeCurrent.getHours()) + ":" + this.getTimePart(timeCurrent.getMinutes()) + ":" + this.getTimePart(timeCurrent.getSeconds());
+        },
+
+        timerId: null,
+
+        getInitialState: function() {
+          return {
+            vendors: [],
+
+            vendorCurrent: null,
+            appointments: [],
+            masterId: null,
+            serviceId: null,
+            timeFrom: this.getTimeCurrent(10),
+            timeTo: this.getTimeCurrent(40),
+            appointmentId: null,
+
+            noteCaption: null,
+            noteContent: null,
+            customerName: null,
+            customerPhone: "79105550055",
+
+
+            isNotAuthorized: false,
+            autorizeTimeout: 0,
+            remainigSeconds: 180,
+            code: ""
+          };
+        },
+
+        componentDidMount: function() {
+          this.sessionCheck();
+          this.vendorsLoad();
+        },
+
+        vendorsLoad: function() {
+          var self = this;
+          RequestPost(
+            "http://mylookup.site/Vendor/Vendors",
+            {},
+            function () {
+                          if (this.readyState === 4 && this.status === 200) {
+                var vendors = JSON.parse(this.responseText);
+                console.log(vendors);
+                self.setState({ vendors: vendors });
+              }
+            },
+            function () {
+                          console.log(`Ошибка: ${this.statusText} | ${this.responseText}`);
+                  });
+        },
+
+        onVendorSelect: function(event) {
+          this.vendorLoad(event.target.value);
+          this.vendorAppointmentsLoad(event.target.value);
+        },
+
+        vendorMasterSelect: function(event) {
+          this.setState({ masterId: event.target.value });
+        },
+
+        vendorServiceSelect: function(event) {
+          this.setState({ serviceId: event.target.value });
+        },
+
+        onTimeFromChange: function(event) {
+          this.setState({ timeFrom: event.target.value });
+        },
+
+        onTimeToChange: function(event) {
+          this.setState({ timeTo: event.target.value });
+        },
+
+        onNoteCaptionChange: function(event) {
+          this.setState({ noteCaption: event.target.value });
+        },
+
+        onNoteContentChange: function(event) {
+          this.setState({ noteContent: event.target.value });
+        },
+
+        onCustomerNameChange: function(event) {
+          this.setState({ customerName: event.target.value });
+        },
+
+        onCustomerPhoneChange: function(event) {
+          this.setState({ customerPhone: event.target.value });
+        },
+
+        onAppointmentTimeoutUpdate: function() {
+          this.setState({ remainigSeconds: this.state.remainigSeconds - 1 });
+                this.timerId = setTimeout(this.onAppointmentTimeoutUpdate, 1000);
+        },
+
+        onAppointmentCodeChange: function(event) {
+          this.setState({ code: event.target.value });
+        },
+
+
+        vendorLoad: function(vendorId) {
+          var self = this;
+          RequestGet(
+            "http://mylookup.site/Vendor/Vendor/" + vendorId,
+            function () {
+                          if (this.readyState === 4 && this.status === 200) {
+                var vendor = JSON.parse(this.responseText);
+                console.log(vendor);
+                self.setState({ vendorCurrent: vendor });
+              }
+            },
+            function () {
+                          console.log(`Ошибка: ${this.statusText} | ${this.responseText}`);
+                  });
+        },
+
+        vendorAppointmentsLoad: function(vendorId) {
+          var self = this;
+          RequestPost(
+            "http://mylookup.site/Vendor/Appointments",
+            {
+              vendorId: vendorId,
+              timeFrom: this.getTimeCurrent(-1440),
+              timeTo: this.getTimeCurrent(1440)
+            },
+            function () {
+                          if (this.readyState === 4 && this.status === 200) {
+                var appointments = JSON.parse(this.responseText);
+                console.log(this.responseText);
+                self.setState({ appointments: appointments });
+              }
+            },
+            function () {
+                          console.log(`Ошибка: ${this.statusText} | ${this.responseText}`);
+                  });
+        },
+
+        vendorRatingAppend: function(event) {
+          var self = this;
+          RequestPost(
+            "http://mylookup.site/Customer/RatingAppend",
+            {
+              vendorId: this.state.vendorCurrent.id,
+              value: Number(event.target.value),
+              customer: {
+                phone: this.state.customerPhone,
+                name: this.state.customerName
+              }
+            },
+            function () {
+                          if (this.readyState === 4 && this.status === 200) {
+                console.log(this.responseText);
+                self.vendorLoad(self.state.vendorCurrent.id);
+              }
+            },
+            function () {
+                          console.log(`Ошибка: ${this.statusText} | ${this.responseText}`);
+                  });
+        },
+
+        vendorNoteAppend: function(event) {
+          var self = this;
+          RequestPost(
+            "http://mylookup.site/Customer/NoteAppend",
+            {
+              vendorId: this.state.vendorCurrent.id,
+              caption: this.state.noteCaption,
+              content: this.state.noteContent,
+              customer: {
+                phone: this.state.customerPhone,
+                name: this.state.customerName
+              }
+            },
+            function () {
+                          if (this.readyState === 4 && this.status === 200) {
+                console.log(this.responseText);
+              }
+            },
+            function () {
+                          console.log(`Ошибка: ${this.statusText} | ${this.responseText}`);
+                  });
+        },
+
+        vendorAppointmentAppend: function(event) {
+          var self = this;
+          RequestPost(
+            "http://mylookup.site/Customer/AppointmentAppend",
+            {
+              vendorId: this.state.vendorCurrent.id,
+              masterId: this.state.masterId,
+              serviceId: this.state.serviceId,
+              timeFrom: this.state.timeFrom,
+              timeTo: this.state.timeTo,
+              customer: {
+                phone: this.state.customerPhone,
+                name: this.state.customerName
+              }
+            },
+            function () {
+                          if (this.readyState === 4 && this.status === 200) {
+                console.log(this.responseText);
+                var appointment = JSON.parse(this.responseText);
+                self.setState({ appointmentId: appointment.id, remainigSeconds: 180 });
+                self.onAppointmentTimeoutUpdate();
+              }
+            },
+            function () {
+                          console.log(`Ошибка: ${this.statusText} | ${this.responseText}`);
+                  });
+        },
+
+        vendorAppointmentApprove: function(event) {
+          var self = this;
+          RequestPost(
+            "http://mylookup.site/Customer/AppointmentApprove",
+            {
+              appointmentId: this.state.appointmentId,
+              code: this.state.code
+            },
+            function () {
+              if (this.readyState === 4 && this.status === 200) {
+                console.log(this.responseText);
+                clearTimeout(this.timerId);
+                self.setState({ appointmentId: null });
+              }
+            },
+            function () {
+              console.log(`Ошибка: ${this.statusText} | ${this.responseText}`);
+            }
+          );
+        },
+
+        sessionCheck: function() {
+          var self = this;
+          var session = JSON.parse(window.localStorage.getItem("session") || "{}");
+          RequestPost(
+            "http://mylookup.site/Session/SessionCheck",
+            {
+              phone: session.phone,
+              token: session.token
+            },
+            function () {
+              if (this.readyState === 4 && this.status === 200) {
+                console.log(this.responseText);
+                var session = JSON.parse(this.responseText);
+                self.setState({ customerName: session.customerName });
+              } else {
+                self.setState({ isNotAuthorized: true });
+              }
+            },
+            function () {
+              console.log(`Ошибка: ${this.statusText} | ${this.responseText}`);
+            }
+          );
+        },
+
+        sessionCreate: function() {
+          var self = this;
+          var session = JSON.parse(window.localStorage.getItem("session") || "{}");
+          RequestPost(
+            "http://mylookup.site/Session/SessionCreate",
+            {
+              phone: this.state.customerPhone,
+              customerName: this.state.customerName
+            },
+            function () {
+              if (this.readyState === 4 && this.status === 200) {
+                console.log(this.responseText);
+                var session = JSON.parse(this.responseText);
+                window.localStorage.setItem(
+                  "session",
+                  JSON.stringify(
+                    {
+                      phone: session.phone,
+                      token: session.token
+                    }
+                  )
+                );
+                self.setState({
+                  autorizeTimeout: Number(session.timeoutSeconds),
+                  customerName: session.customerName,
+                });
+                self.onAuthorizeTimeoutUpdate();
+                console.log(window.localStorage.getItem("session"));
+              }
+            },
+            function () {
+              console.log(`Ошибка: ${this.statusText} | ${this.responseText}`);
+            }
+          );
+        },
+
+        sessionApprove: function() {
+          var self = this;
+          var session = JSON.parse(window.localStorage.getItem("session") || "{}");
+          RequestPost(
+            "http://mylookup.site/Session/SessionApprove",
+            {
+              phone: session.phone,
+              token: session.token,
+              code: this.state.code
+            },
+            function () {
+              if (this.readyState === 4 && this.status === 200) {
+                console.log(this.responseText);
+                self.setState({ isNotAuthorized: false, autorizeTimeout: 0 });
+                clearTimeout(this.timerAuthorizeId);
+              }
+            },
+            function () {
+              console.log(`Ошибка: ${this.statusText} | ${this.responseText}`);
+            }
+          );
+        },
+
+        sessionClose: function() {
+          var self = this;
+          var session = JSON.parse(window.localStorage.getItem("session") || "{}");
+          RequestPost(
+            "http://mylookup.site/Session/SessionClose",
+            {
+              phone: session.phone,
+              token: session.token
+            },
+            function () {
+              if (this.readyState === 4 && this.status === 200) {
+                console.log(this.responseText);
+                self.setState({ isNotAuthorized: true, autorizeTimeout: 0, customerName: "" });
+              }
+            },
+            function () {
+              console.log(`Ошибка: ${this.statusText} | ${this.responseText}`);
+            }
+          );
+        },
+
+        onAuthorizeTimeoutUpdate: function(seconds) {
+          // if(seconds <= 0) {
+          //   clearTimeout(this.timerAuthorizeId);
+          // }
+          // else {
+            this.setState({ autorizeTimeout: this.state.autorizeTimeout - 1 });
+            this.timerAuthorizeId = setTimeout(this.onAuthorizeTimeoutUpdate, 1000);
+          // }
+        },
+
+        renderSession: function() {
+          return (
+            <div>
+              { this.state.isNotAuthorized === false && this.state.customerName }
+              <button onClick={this.sessionClose}>Выйти</button>
+              {
+                this.state.isNotAuthorized === true &&
+                <div style = {{ margin: "20px", border: "1px solid #000000", padding: "10px" }}>
+                  Авторизоваться<br/><br/>
+                  Имя:<br/>
+                  <input type="text" style = {{ width: "100%" }} value={this.state.customerName || ""} onChange={this.onCustomerNameChange}></input><br/>
+                  Телефон:<br/>
+                  <input type="text" style = {{ width: "100%" }} value={this.state.customerPhone || ""} onChange={this.onCustomerPhoneChange}></input><br/><br/>
+                  <button onClick={this.sessionCreate}>Отправить</button>
+                </div>
+              }
+              {
+                this.state.autorizeTimeout > 0 &&
+                <div style = {{ margin: "20px", border: "1px solid #000000", padding: "10px" }}>
+                  Подтвердить<br/><br/>
+                  Осталось {this.state.autorizeTimeout} сек.<br />
+                  Код из СМС:<br/>
+                  <input type="text" style = {{ width: "100%" }} value={this.state.code || ""} onChange={this.onAppointmentCodeChange}></input><br/><br/>
+                  <button onClick={this.sessionApprove}>Подтвердить</button>
+                </div>
+              }
+            </div>
+          );
+        },
+
+        renderVendor: function() {
+          if(this.state.vendorCurrent) {
+            var servicesList = this.state.vendorCurrent.services.map(function(service) {
+              return (
+                <div key={service.id}>
+                  <div>{service.name} - {service.price} / {service.id}</div>
+                </div>
+              );
+            });
+            var mastersList = this.state.vendorCurrent.masters.map(function(master) {
+              var servicesItems = master.services.map(function(service) {
+                return <div key={service.id}>{service.name}</div>
+              });
+              return (
+                <div key={master.id}>
+                  <div>{master.name} / {master.id}</div>
+                  <div>
+                    {servicesItems}
+                  </div>
+                </div>
+              );
+            });
+            var mastersItems = this.state.vendorCurrent.masters.map(function(master) {
+              return <option key={master.id} value={master.id}>{master.name}</option>;
+            });
+
+            var servicesItems = this.state.vendorCurrent.services.map(function(service) {
+              return <option key={service.id} value={service.id}>{service.name}</option>;
+            });
+
+            var appointmentsList = this.state.appointments.map(function(appointment) {
+              return <div key={appointment.id}>{appointment.timeFrom} - {appointment.timeTo} / {appointment.serviceName} {appointment.masterName} / {appointment.customer.name} {appointment.customer.phone}</div>;
+            });
+
+            return (
+              <div>
+                <div style = {{ margin: "20px" }}>
+                  <div>Наименование: {this.state.vendorCurrent.name} / {this.state.vendorCurrent.id}</div>
+                  <div>Адрес: {this.state.vendorCurrent.address}</div>
+                </div>
+
+                <div style = {{ margin: "20px" }}>
+                  <div>Записи</div>
+                  <div style = {{ margin: "10px" }}>
+                    {appointmentsList}
+                  </div>
+                </div>
+
+                <div style = {{ margin: "20px" }}>
+                  Услуги:<br/>
+                  <div style = {{ margin: "10px" }}>
+                    {servicesList}
+                  </div>
+                </div>
+                <div style = {{ margin: "20px" }}>
+                  Мастера:<br/>
+                  <div style = {{ margin: "10px" }}>
+                    {mastersList}
+                  </div>
+                </div>
+
+                <div style = {{ margin: "20px", border: "1px solid #000000", padding: "10px" }}>
+                  Рейтинг: {this.state.vendorCurrent.ratingValue}/{this.state.vendorCurrent.ratingCount}<br/>
+                  Оценить<br/><br/>
+                  <button value="1" onClick={this.vendorRatingAppend}>1</button>
+                  <button value="2" onClick={this.vendorRatingAppend}>2</button>
+                  <button value="3" onClick={this.vendorRatingAppend}>3</button>
+                  <button value="4" onClick={this.vendorRatingAppend}>4</button>
+                  <button value="5" onClick={this.vendorRatingAppend}>5</button><br/><br/>
+                  Имя:<br/>
+                  <input type="text" style = {{ width: "100%" }} value={this.state.customerName || ""} onChange={this.onCustomerNameChange}></input><br/>
+                  Телефон:<br/>
+                  <input type="text" style = {{ width: "100%" }} value={this.state.customerPhone || ""} onChange={this.onCustomerPhoneChange}></input><br/><br/>
+                </div>
+
+
+                <div style = {{ margin: "20px", border: "1px solid #000000", padding: "10px" }}>
+                  Оставить отзыв<br/><br/>
+                  Заголовок:<br/>
+                  <input type="text" style = {{ width: "100%" }} value={this.state.noteCaption || ""} onChange={this.onNoteCaptionChange}></input><br/>
+                  Содержание:<br/>
+                  <textarea style = {{ width: "100%" }} value={this.state.noteContent || ""} onChange={this.onNoteContentChange}></textarea><br/>
+                  Имя:<br/>
+                  <input type="text" style = {{ width: "100%" }} value={this.state.customerName || ""} onChange={this.onCustomerNameChange}></input><br/>
+                  Телефон:<br/>
+                  <input type="text" style = {{ width: "100%" }} value={this.state.customerPhone || ""} onChange={this.onCustomerPhoneChange}></input><br/><br/>
+                  <button onClick={this.vendorNoteAppend}>Отправить</button>
+                </div>
+
+                <div style = {{ margin: "20px", border: "1px solid #000000", padding: "10px" }}>
+                  Записаться<br/><br/>
+                  Мастер:<br/>
+                  <select style = {{ width: "100%" }} onChange={this.vendorMasterSelect}>
+                    <option>-</option>
+                    {mastersItems}
+                  </select><br/>
+                  Услуга:<br/>
+                  <select style = {{ width: "100%" }} onChange={this.vendorServiceSelect}>
+                    <option>-</option>
+                    {servicesItems}
+                  </select><br/>
+                  Время с:<br/>
+                  <input type="text" style = {{ width: "100%" }} value={this.state.timeFrom || ""} onChange={this.onTimeFromChange}></input><br/>
+                  Время по:<br/>
+                  <input type="text" style = {{ width: "100%" }} value={this.state.timeTo || ""} onChange={this.onTimeToChange}></input><br/>
+                  Имя:<br/>
+                  <input type="text" style = {{ width: "100%" }} value={this.state.customerName || ""} onChange={this.onCustomerNameChange}></input><br/>
+                  Телефон:<br/>
+                  <input type="text" style = {{ width: "100%" }} value={this.state.customerPhone || ""} onChange={this.onCustomerPhoneChange}></input><br/><br/>
+                  <button onClick={this.vendorAppointmentAppend}>Отправить</button>
+                </div>
+
+                {
+                  this.state.appointmentId &&
+                  <div style = {{ margin: "20px", border: "1px solid #000000", padding: "10px" }}>
+                    Подтвердить запись<br/><br/>
+                    Осталось {this.state.remainigSeconds} сек.<br />
+                    Код из СМС:<br/>
+                    <input type="text" style = {{ width: "100%" }} value={this.state.code || ""} onChange={this.onAppointmentCodeChange}></input><br/><br/>
+                    <button onClick={this.vendorAppointmentApprove}>Подтвердить</button>
+                  </div>
+                }
+
+              </div>
+            );
+          }
+          return null;
+        },
+
+        render: function(event) {
+          var vendorsItems = this.state.vendors.map(function(vendor) {
+            return <option key={vendor.id} value={vendor.id}>{vendor.name}</option>
+          });
+
+          var vendorsList = this.state.vendors.map(function(vendor) {
+            var services = vendor.services.map(function(service, serviceIndex) {
+              return (
+                <div key={service.id} style = {{ margin: "10px" }}>
+                  {service.name} - {service.price} / {service.id}
+                </div>
+              );
+            });
+
+            var notes = vendor.notes.map(function(note) {
+              return (
+                <div key={note.id} style = {{ margin: "10px" }}>
+                  <div>{note.time} {note.caption} / {note.id}</div>
+                  <div>{note.customer.name} / {note.customer.phone}</div>
+                  <div>{note.content}</div>
+                </div>
+              );
+            });
+
+            return (
+              <div key={vendor.id} style = {{ margin: "20px", borderTop: "2px solid #000000" }}>
+                <div>Наименование: {vendor.name} / {vendor.id}</div>
+                <div>Рейтинг: {vendor.ratingValue}/{vendor.ratingCount}</div>
+                <div>Адрес: {vendor.address}</div>
+                Услуги:
+                <div style = {{ marginLeft: "20px" }}>
+                  {services}
+                </div>
+                Отзывы:
+                <div style = {{ marginLeft: "20px" }}>
+                  {notes}
+                </div>
+              </div>
+            );
+          });
+
+          return (
+            <div>
+              <div>
+                {this.renderSession()}
+              </div>
+
+              <div>
+                <select style = {{ margin: "20px", width: "50%" }} onChange={this.onVendorSelect}>
+                  <option>-</option>
+                  {vendorsItems}
+                </select>
+                {this.renderVendor()}
+              </div>
+
+              <div>
+                {vendorsList}
+              </div>
+            </div>
+          );
+        }
+      });
+
+      ReactDOM.render(
+        <AppointmentCreate />,
+        document.getElementById('container')
+      );
+    </script>
+  </head>
+
+  <body>
+    <div id="container"></div>
+  </body>
+</html>

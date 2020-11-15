@@ -1,0 +1,80 @@
+@use "../utils";
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+:focus {
+  outline-style: none;
+}
+
+:focus-visible {
+  outline: thin dotted;
+  // stylelint-disable-next-line declaration-block-no-duplicate-properties
+  outline: -webkit-focus-ring-color auto 1px;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", "Arial", sans-serif;
+  font-size: 16px;
+  line-height: 1;
+}
+
+body {
+  min-width: utils.$size-content-minWidth;
+  margin: 0;
+  color: utils.$color-black;
+  background-color: utils.$color-white;
+}
+
+:root {
+  // single colors
+  --color_gold: utils.$color-gold;
+  --color_pink: utils.$color-pink;
+  --color_red: utils.$color-red;
+  --color_white: utils.$color-white;
+
+  // black colors
+  --color_black: utils.$color-black;
+  --color_black-alpha-01: utils.$color-black-alpha-01;
+
+  // blackberry colors
+  --color_blackberry: utils.$color-blackberry;
+  --color_blackberry-dark: utils.$color-blackberry-dark;
+  --color_blackberry-darkest: utils.$color-blackberry-darkest;
+  --color_blackberry-light: utils.$color-blackberry-light;
+  --color_blackberry-lightest: utils.$color-blackberry-lightest;
+
+  // blueberry colors
+  --color_blueberry: utils.$color-blueberry;
+  --color_blueberry-dark: utils.$color-blueberry-dark;
+  --color_blueberry-darkest: utils.$color-blueberry-darkest;
+  --color_blueberry-light: utils.$color-blueberry-light;
+  --color_blueberry-lightest: utils.$color-blueberry-lightest;
+
+  // gray colors
+  --color_gray: utils.$color-gray;
+  --color_gray-light: utils.$color-gray-light;
+  --color_gray-lightest: utils.$color-gray-lightest;
+
+  // mercury colors
+  --color_mercury: utils.$color-mercury;
+  --color_mercury-dark: utils.$color-mercury-dark;
+  --color_mercury-light: utils.$color-mercury-light;
+
+  // mint colors
+  --color_mint: utils.$color-mint;
+  --color_mint-dark: utils.$color-mint-dark;
+  --color_mint-darkest: utils.$color-mint-darkest;
+  --color_mint-light: utils.$color-mint-light;
+  --color_mint-lightest: utils.$color-mint-lightest;
+
+  // primary colors
+  --color_primary: utils.$color-primary;
+  --color_primary-dark: utils.$color-primary-dark;
+  --color_primary-light: utils.$color-primary-light;
+  --color_primary-lightest: utils.$color-primary-lightest;
+}

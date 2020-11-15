@@ -1,0 +1,38 @@
+@use "~scss/utils";
+
+$color-blue: #1c76db;
+
+.root {
+  display: grid;
+  grid-template: auto auto / 1fr auto auto;
+  row-gap: 8px;
+  align-items: center;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  font-size: 12px;
+}
+
+.distance {
+  text-align: right;
+  color: utils.$color-gray;
+}
+
+.marker {
+  margin-right: 8px;
+}
+
+.separator {
+  margin-top: -6px;
+  margin-left: 16px;
+  margin-right: 16px;
+  text-align: center;
+  color: utils.$color-gray;
+}
+
+.show {
+  grid-column: 1 / -1;
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  color: $color-blue;
+}

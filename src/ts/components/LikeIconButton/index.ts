@@ -1,0 +1,1 @@
+export { LikeIconButton } from './self';

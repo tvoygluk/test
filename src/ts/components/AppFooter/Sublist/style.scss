@@ -1,0 +1,25 @@
+@use "~scss/utils";
+
+.item {
+  margin-bottom: 18px;
+  font-size: 12px;
+  line-height: 14px;
+  color: utils.$color-gray;
+
+  &_last {
+    composes: item;
+
+    margin-bottom: 0;
+  }
+}
+
+.list {
+  composes: list from "~scss/scaffold.scss";
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 32px;
+  font-size: 14px;
+  line-height: 16px;
+}

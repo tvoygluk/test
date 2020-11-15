@@ -1,0 +1,59 @@
+@use "~scss/utils";
+
+$time-width: 64px;
+$time-gutter-hor: 8px;
+$time-gutter-ver: 12px;
+$time-semigutter-hor: $time-gutter-hor / 2;
+$time-semigutter-ver: $time-gutter-ver / 2;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 24px;
+  padding-bottom: 6px;
+}
+
+.button {
+  width: 290px;
+}
+
+.caption {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.header {
+  margin-bottom: 26px;
+}
+
+.time {
+  display: block;
+  width: 100%;
+  border: 2px solid utils.$color-pink;
+  border-radius: 4px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  box-shadow: 0 5px 5px 0 utils.$color-black-alpha-01;
+}
+
+.item {
+  margin: $time-semigutter-ver $time-semigutter-hor;
+  width: 64px;
+}
+
+.list {
+  composes: list from "~scss/scaffold.scss";
+  display: flex;
+  flex-wrap: wrap;
+  margin: (-$time-semigutter-ver) (-$time-semigutter-hor);
+}
+
+.timegrid {
+  margin-bottom: 22px;
+  width: ($time-width + $time-gutter-hor) * 4;
+  padding: $time-semigutter-ver $time-semigutter-hor;
+}

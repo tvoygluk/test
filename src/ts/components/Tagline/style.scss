@@ -1,0 +1,32 @@
+@use "~scss/utils";
+
+.root {
+  composes: root from "~components/Slider/style.scss";
+  height: 34px;
+}
+
+.item {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  padding-left: 18px;
+  padding-right: 18px;
+  font-size: 14px;
+  color: black;
+  background-color: utils.$color-gray-lightest;
+
+  &_last {
+    margin-right: 0;
+  }
+
+  &_active {
+    color: utils.$color-white;
+    background-color: utils.$color-pink;
+  }
+}
+
+.list {
+  composes: padX from "~scss/scaffold.scss";
+  composes: wrapper from "~components/Slider/style.scss";
+}

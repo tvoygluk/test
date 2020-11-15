@@ -1,0 +1,19 @@
+.root {
+  composes: root from "~components/Slider/style.scss";
+  height: 114px;
+}
+
+.item {
+  color: blue;
+  margin-right: 8px;
+
+  &_last {
+    composes: item;
+    margin-right: 0;
+  }
+}
+
+.list {
+  composes: list padX from "~scss/scaffold.scss";
+  composes: wrapper from "~components/Slider/style.scss";
+}

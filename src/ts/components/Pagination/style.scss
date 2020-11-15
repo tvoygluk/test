@@ -1,0 +1,22 @@
+@use "~scss/utils";
+
+.root {
+  composes: padX from "~scss/scaffold.scss";
+  display: flex;
+  justify-content: space-between;
+}
+
+.item {
+  $size: 46px;
+
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  font-size: 18px;
+
+  &_current {
+    composes: item;
+    color: utils.$color-white;
+    background-color: utils.$color-black;
+  }
+}

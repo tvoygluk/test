@@ -1,0 +1,1 @@
+export { AppHeaderUserBar } from './self';

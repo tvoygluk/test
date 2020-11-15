@@ -1,0 +1,18 @@
+@use "~scss/utils";
+
+.root {
+  display: grid;
+  row-gap: 16px;
+}
+
+.menuPanel {
+  composes: panel from "../helpers.scss";
+}
+
+.menuList {
+  composes: list from "../helpers.scss";
+}
+
+.menuItem {
+  composes: panelItem from "../helpers.scss";
+}

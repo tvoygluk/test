@@ -1,0 +1,41 @@
+@use "~scss/utils";
+
+.root {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  align-content: start;
+  height: 100%;
+  padding: 24px 20px;
+  background-color: #f6f4f4;
+}
+
+.owner {
+  composes: panel from "./helpers.scss";
+  align-self: start;
+  margin-bottom: 32px;
+}
+
+.ownerLegend {
+  composes: panelItem from "./helpers.scss";
+}
+
+.userBar {
+  margin-bottom: 16px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  z-index: 2;
+}
+
+.copyright {
+  font-size: 14px;
+  color: utils.$color-gray;
+}
+
+.support {
+  margin-bottom: 32px;
+}

@@ -1,0 +1,19 @@
+$this: ".Page";
+
+:global {
+  #{$this} {
+    height: 100%;
+  }
+
+  #{$this}-Body {
+    height: inherit;
+  }
+
+  #{$this}-AppWrapper {
+    height: inherit;
+  }
+
+  #{$this}-App {
+    height: inherit;
+  }
+}

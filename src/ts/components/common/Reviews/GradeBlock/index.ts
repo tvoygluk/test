@@ -1,0 +1,1 @@
+export { GradeBlock } from './self';

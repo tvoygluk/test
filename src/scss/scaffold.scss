@@ -1,0 +1,67 @@
+@use "./utils";
+
+.button {
+  border-style: none;
+  padding: 0;
+  font-size: inherit;
+  line-height: inherit;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: utils.$size-content-minWidth;
+}
+
+.field {
+  border-style: none;
+  padding: 0;
+  font-size: inherit;
+  line-height: inherit;
+  background-color: transparent;
+}
+
+.heading {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.list {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.padX {
+  padding-left: var(--size_paddingX);
+  padding-right: var(--size_paddingX);
+}
+
+.visuallyHidden {
+  @at-root {
+    &:not(:active),
+    &:not(:focus),
+    input[type="checkbox"]#{&},
+    input[type="radio"]#{&} {
+      appearance: none;
+      margin: -1px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      border-style: none;
+      padding: 0;
+      white-space: nowrap;
+      clip: rect(0 0 0 0);
+      clip-path: inset(100%);
+    }
+  }
+}

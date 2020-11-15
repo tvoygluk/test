@@ -1,0 +1,10 @@
+@use "~scss/utils";
+
+.root {
+  padding: 6px 14px;
+  font-size: 12px;
+  line-height: 14px;
+  color: utils.$color-gray;
+  border: 1px solid utils.$color-blueberry-light;
+  border-radius: 13px;
+}

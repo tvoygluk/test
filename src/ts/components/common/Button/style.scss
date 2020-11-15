@@ -1,0 +1,48 @@
+@use "~scss/utils";
+
+$borderWidth: 0.125rem;
+
+$padding: (
+  utils.$size-control-standard-height
+  - utils.$text-standard-lineHeight
+  - $borderWidth * 2
+) / 2;
+
+.root {
+  composes: button from "~scss/scaffold.scss";
+}
+
+._standard {
+  @include utils.text-size-standard();
+
+  border: $borderWidth solid utils.$color-black;
+  border-radius: utils.$decor-borderRadius;
+  padding: $padding;
+  font-weight: 500;
+
+  &:focus {
+    outline-style: none;
+  }
+}
+
+.black {
+  composes: _standard;
+
+  color: utils.$color-white;
+  background-color: utils.$color-black;
+  box-shadow: utils.$decor-boxShadow;
+
+  &:focus-visible {
+    background-color: utils.$color-gray;
+  }
+}
+
+.transparent {
+  composes: _standard;
+
+  color: utils.$color-black;
+
+  &:focus-visible {
+    border-color: utils.$color-gray;
+  }
+}

@@ -1,0 +1,1 @@
+export { DiscountsItem } from './self';

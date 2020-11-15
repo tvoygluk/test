@@ -1,0 +1,54 @@
+// single colors
+$gold: #ffc50f;
+$pink: #f54d92;
+$red: red;
+$white: white;
+
+// black colors
+$black: black;
+$black-alpha-01: rgba(0, 0, 0, 0.1);
+
+// blackberry colors
+$blackberry: #014fce;
+$blackberry-dark: #003db7;
+$blackberry-darkest: #002094;
+$blackberry-light: #6384e0;
+$blackberry-lightest: #e7eafa;
+
+// blueberry colors
+$blueberry: #0097fd;
+$blueberry-dark: #0077db;
+$blueberry-darkest: #0048aa;
+$blueberry-light: #45b6fc;
+$blueberry-lightest: #e1f3fe;
+
+// gray colors
+$gray: #7c7c7c;
+$gray-light: #ababab; // userDropdownBorder
+$gray-lightest: #e6e3e3; // gray-headerBorder
+
+// NOTE: primary colors from brandbook, may appear in some usecases later
+$primary: #bbc1c7;
+$primary-dark: #9198a0;
+$primary-light: #e2e5eb;
+$primary-lightest: #f2f3f7;
+
+//mercury colors
+$mercury: #e6e6e6; // gray-userProfileBorder
+$mercury-dark: #dddddd; // gray-inputBorder
+$mercury-light: #f5f5f5; // gray-loginBg
+
+// mint colors
+$mint: #00c19b;
+$mint-dark: #03a17b;
+$mint-darkest: #00724d;
+$mint-light: #00d9bc;
+$mint-lightest: #dff9f5;
+
+// secondary level
+$header-border: $gray-lightest;
+$input-border: $mercury-dark;
+$login-background: $mercury-light;
+$user-dropdown-border: $gray-light;
+$user-profile-border: $mercury;
+$rating: $gold;

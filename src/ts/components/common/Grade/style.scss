@@ -1,0 +1,13 @@
+@use "~scss/utils";
+
+.root {
+  display: flex;
+  width: 165px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.star {
+  composes: button from "~scss/scaffold.scss";
+  cursor: default;
+}

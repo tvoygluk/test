@@ -1,0 +1,23 @@
+@use "~scss/utils";
+
+.panel {
+  border-radius: 4px;
+  padding: 16px;
+  background-color: utils.$color-white;
+}
+
+.panelItem {
+  font-size: 14px;
+}
+
+.group {
+  display: grid;
+  justify-items: start;
+}
+
+.list {
+  composes: list from "~scss/scaffold.scss";
+  composes: group;
+
+  row-gap: 24px;
+}

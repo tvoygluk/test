@@ -1,0 +1,1 @@
+export { VendorGeography } from './self';

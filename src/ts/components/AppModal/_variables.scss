@@ -1,0 +1,10 @@
+$sm-maxWidth: 500px;
+$md-maxWidth: 700px;
+
+$closeButton-width: 17px;
+$closeButton-height: 16px;
+
+$closeButton-offset: 32px;
+
+$closeButton-shiftX: $closeButton-offset - $closeButton-width;
+$closeButton-shiftY: $closeButton-offset - $closeButton-height;

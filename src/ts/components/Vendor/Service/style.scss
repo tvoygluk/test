@@ -1,0 +1,46 @@
+@use "~scss/utils";
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  font-size: 14px;
+}
+
+.firstRow {
+  margin-bottom: 6px;
+}
+
+.secondRow {
+  color: utils.$color-gray;
+}
+
+.leftColumn {
+  width: 75%;
+}
+
+.rightColumn {
+  width: 25%;
+  text-align: right;
+}
+
+.title {
+  composes: firstRow leftColumn;
+  margin-top: 0;
+}
+
+.price {
+  composes: firstRow rightColumn;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.duration {
+  composes: secondRow leftColumn;
+}
+
+.discount {
+  composes: secondRow rightColumn;
+}

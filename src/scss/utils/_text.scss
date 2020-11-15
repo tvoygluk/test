@@ -1,0 +1,13 @@
+$standard-fontSize: 0.875rem;
+$standard-lineHeight: 1rem;
+
+@mixin size-standard() {
+  font-size: $standard-fontSize;
+  line-height: $standard-lineHeight;
+}
+
+@mixin size-caption() {
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.125rem;
+}

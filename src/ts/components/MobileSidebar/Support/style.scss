@@ -1,0 +1,15 @@
+.caption {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 18px;
+}
+
+.group {
+  composes: group from "../helpers.scss";
+
+  row-gap: 20px;
+}
+
+.label {
+  composes: panelItem from "../helpers.scss";
+}

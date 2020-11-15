@@ -1,0 +1,13 @@
+@use "~scss/utils";
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 14px;
+  line-height: 17px;
+  color: utils.$color-gray;
+}

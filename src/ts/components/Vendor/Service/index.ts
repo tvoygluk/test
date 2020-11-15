@@ -1,0 +1,1 @@
+export { VendorService } from './self';

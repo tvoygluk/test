@@ -1,0 +1,27 @@
+@use "~scss/utils";
+
+.root {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.container {
+  composes: container from "~scss/scaffold.scss";
+}
+
+.heading {
+  composes: heading padX from "~scss/scaffold.scss";
+
+  margin-bottom: 28px;
+}
+
+// TODO: extract this rule to scaffold or create common React component
+.message {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.content {
+  margin-left: auto;
+  margin-right: auto;
+}

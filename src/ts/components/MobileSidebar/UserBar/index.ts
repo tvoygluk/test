@@ -1,0 +1,1 @@
+export { MobileSidebarUserBar } from './self';

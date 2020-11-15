@@ -1,0 +1,17 @@
+doctype html
+html.Page(lang='ru')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, shrink-to-fit=no')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    title LOOKAP
+    link(rel='icon shortcut' href=require('../favicons/favicon.ico').default)
+    each fontWeight in [400, 500, 700]
+      link(
+        rel='preload',
+        href=require(`../fonts/helvetica-neue-cyr_${fontWeight}_normal.woff2`).default
+        as='font'
+        crossorigin
+      )
+  body.Page-Body
+    .Page-AppWrapper(id='app-root')

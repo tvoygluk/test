@@ -1,0 +1,86 @@
+@use "sass:list";
+@use "~scss/utils";
+
+$colorslist: (
+  utils.$color-white,
+  utils.$color-red,
+  utils.$color-pink,
+  utils.$color-black,
+  utils.$color-black-alpha-01,
+  utils.$color-gray-lightest,
+  utils.$color-gray-light,
+  utils.$color-gray,
+  utils.$color-mercury-light,
+  utils.$color-mercury,
+  utils.$color-mercury-dark,
+  utils.$color-primary-lightest,
+  utils.$color-primary-light,
+  utils.$color-primary,
+  utils.$color-primary-dark,
+  utils.$color-mint-lightest,
+  utils.$color-mint-light,
+  utils.$color-mint,
+  utils.$color-mint-dark,
+  utils.$color-mint-darkest,
+  utils.$color-blueberry-lightest,
+  utils.$color-blueberry-light,
+  utils.$color-blueberry,
+  utils.$color-blueberry-dark,
+  utils.$color-blueberry-darkest,
+  utils.$color-blackberry-lightest,
+  utils.$color-blackberry-light,
+  utils.$color-blackberry,
+  utils.$color-blackberry-dark,
+  utils.$color-blackberry-darkest,
+);
+
+.root {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.container {
+  composes: container from "~scss/scaffold.scss";
+
+  width: auto;
+}
+
+.heading {
+  composes: heading padX from "~scss/scaffold.scss";
+}
+
+.colors {
+  margin: 1rem;
+  border: 2px solid utils.$color-black;
+}
+
+.title {
+  margin-left: 2rem;
+}
+
+.colorList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.colorItem {
+  display: flex;
+  align-items: center;
+  padding: 0.2rem;
+  min-width: 16rem;
+}
+
+.square {
+  margin: 0 1rem 1rem 0;
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid utils.$color-black;
+}
+
+@each $color in $colorslist {
+  .colorItem:nth-child(#{list.index($colorslist, $color)}) {
+    .square {
+      background-color: $color;
+    }
+  }
+}

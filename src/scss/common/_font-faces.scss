@@ -1,0 +1,18 @@
+$fontWeights: (400, 500, 700,);
+
+@function get-url($weight, $format) {
+  @return
+    url("~@/fonts/helvetica-neue-cyr_#{$weight}_normal.#{$format}")
+    format("#{$format}");
+}
+
+@each $weight in $fontWeights {
+  @font-face {
+    font-family: "Helvetica Neue";
+    font-weight: $weight;
+    font-style: normal;
+    src:
+      get-url($weight, "woff2"),
+      get-url($weight, "woff");
+  }
+}
