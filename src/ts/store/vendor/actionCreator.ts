@@ -22,14 +22,14 @@ export const vendorActionCreator: IVerdorctionCreator = {
       });
 
       try {
-        const data = await vendorApi.getVendors() as IVendor[];
+        // const data = await vendorApi.getVendors() as IVendor[];
 
         // STUB: mocked resolve
-        // const data = await new Promise((resolve) => {
-        //   globalThis.setTimeout(() => {
-        //     resolve(vendorsMock.data);
-        //   }, 1000);
-        // });
+        const data = await new Promise((resolve) => {
+          globalThis.setTimeout(() => {
+            resolve(vendorsMock.data);
+          }, 1000);
+        });
 
         dispatch({
           type: ACTIONS.GET_VENDROS.SUCCESS,
