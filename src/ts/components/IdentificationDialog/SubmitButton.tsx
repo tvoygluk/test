@@ -2,13 +2,13 @@ import React from 'react';
 
 import { Button } from 'common/Button';
 
-interface ILoginDialogSubmitButtonProps {
+interface IIdentificationDialogSubmitButtonProps {
   className?: string;
   legend: string;
   isActive: boolean;
 }
 
-export const LoginDialogSubmitButton: React.FC<ILoginDialogSubmitButtonProps> = ({
+export const IdentificationDialogSubmitButton: React.FC<IIdentificationDialogSubmitButtonProps> = ({
   className,
   legend,
   isActive,
@@ -17,10 +17,12 @@ export const LoginDialogSubmitButton: React.FC<ILoginDialogSubmitButtonProps> = 
     <Button
       className={className}
       type="submit"
+      variant="black"
       disabled={!isActive}
-      isBlack
     >
       {legend}
     </Button>
   );
 };
+
+IdentificationDialogSubmitButton.displayName = 'IdentificationDialog-SubmitButton';

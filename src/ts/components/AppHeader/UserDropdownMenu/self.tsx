@@ -30,3 +30,5 @@ export const AppHeaderUserDropdownMenu: React.FC<IAppHeaderUserDropdownMenuProps
     </div>
   );
 };
+
+AppHeaderUserDropdownMenu.displayName = 'AppHeader-UserDropdownMenu';

@@ -35,34 +35,31 @@ export const VendorCheckIn: React.FC<IVendorCheckInProps> = ({
       })}
     >
       <div className={style.header}>
-        <Button className={style.toggle} onClick={onToggle}>
+        <Button
+          className={style.toggle}
+          aria-expanded={isExpanded}
+          onClick={onToggle}
+        >
           <span className={style.toggleLabel}>Свободное время на сегодня</span>
           <ChevronIcon className={style.chevron} />
         </Button>
       </div>
 
       {isExpanded && (
-        <div className={style.collapsible}>
-          <div className={style.timeGrid}>
-            <ol className={style.list}>
-              {mockedTimeList.map((time) => (
-                <li key={time} className={style.item}>
-                  <Button className={style.time}>
-                    {time}
-                  </Button>
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          <Button
-            className={style.button}
-            isBlack
-          >
-            Записаться
-          </Button>
+        <div className={style.timeGrid}>
+          <ol className={style.list}>
+            {mockedTimeList.map((time) => (
+              <li key={time} className={style.item}>
+                <Button className={style.time}>
+                  {time}
+                </Button>
+              </li>
+            ))}
+          </ol>
         </div>
       )}
     </div>
   );
 };
+
+VendorCheckIn.displayName = 'Vendor-CheckIn';

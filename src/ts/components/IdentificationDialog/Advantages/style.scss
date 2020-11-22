@@ -10,6 +10,14 @@
   background-color: utils.$color-white;
 }
 
+.singUpDialog {
+  justify-content: flex-start;
+}
+
+.singUpDialogButton {
+  margin-top: auto;
+}
+
 .header {
   display: flex;
   flex-direction: column;

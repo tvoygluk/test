@@ -2,8 +2,8 @@ import React from 'react';
 import { noop } from 'lodash';
 
 import { LogoutIcon } from 'common/icons';
-import { LabelledButton } from 'components/LabelledButton';
-import type { FinallyComposedLabelledButtonPropsType } from 'components/LabelledButton';
+import { LabelledButton } from 'common/LabelledButton';
+import type { FinallyComposedLabelledButtonPropsType } from 'common/LabelledButton';
 import { useSession } from 'store/session';
 
 interface ILogoutable {

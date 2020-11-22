@@ -24,3 +24,5 @@ export const AppFooterSublist: React.FC<IProps> = ({ title, items }) => {
     </li>
   );
 };
+
+AppFooterSublist.displayName = 'AppFooter-Sublist';

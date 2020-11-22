@@ -19,6 +19,7 @@ export interface IVendorService {
   name: string;
   price: number;
   vendorId: string;
+  checked?: boolean;
 }
 
 type GeoPositionCoordinate = string | number;

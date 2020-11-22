@@ -39,3 +39,5 @@ export const MobileSidebarUserBar: React.FC<IMobileSidebarUserBarProps> = ({ cla
     </div>
   );
 };
+
+MobileSidebarUserBar.displayName = 'MobileSidebar-UserBar';

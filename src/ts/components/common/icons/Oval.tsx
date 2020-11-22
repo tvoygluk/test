@@ -5,11 +5,12 @@ import type { IColorable } from './Container';
 
 const OvalCurve: React.FC<IColorable> = ({ color }) => {
   return (
-    <circle cx="8.5"
-            cy="8.5"
-            r="7"
-            strokeWidth="3"
-            stroke={color}
+    <circle
+      cx="8.5"
+      cy="8.5"
+      r="7"
+      strokeWidth="3"
+      stroke={color}
     />
   );
 };

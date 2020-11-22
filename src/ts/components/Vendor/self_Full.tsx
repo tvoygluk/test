@@ -7,18 +7,20 @@ import { VendorContent } from './Content';
 
 import style from './style.scss';
 
-interface IVendorFullProps {
+interface IFullVendorProps {
   className?: string;
   data: IVendor;
 }
 
-export const VendorFull: React.FC<IVendorFullProps> = ({
+export const FullVendor: React.FC<IFullVendorProps> = ({
   className,
   data,
 }) => {
   return (
     <div className={classNames(style.root, className)}>
-      <VendorContent data={data} isInner />
+      <VendorContent data={data} />
     </div>
   );
 };
+
+FullVendor.displayName = 'Vendor_full';

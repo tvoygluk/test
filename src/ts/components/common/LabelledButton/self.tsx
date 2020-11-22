@@ -14,12 +14,14 @@ interface ILabelledButtonSpecificProps {
 
 type LabelledButtonProps = Omit<
   React.ComponentPropsWithoutRef<typeof Button> & ILabelledButtonSpecificProps,
-  'isBlack' | 'isTransparent'
+  'variant'
 >;
 
 interface IIconable {
   iconClassName?: string;
 }
+
+// TODO: add ability of right-side icon positioning
 
 export type FinallyComposedLabelledButtonProps<T> = Omit<
   LabelledButtonProps & IIconable & T,
@@ -34,11 +36,9 @@ export const LabelledButton: React.FC<LabelledButtonProps> = ({
   ...propsRest
 }) => {
   return (
-    <Button
-      {...propsRest}
-      className={classNames(style.root, className)}
-    >
+    <Button {...propsRest} className={classNames(style.root, className)}>
       {children}
+
       <span className={classNames(style.label, labelClassName)}>
         {label}
       </span>

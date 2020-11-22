@@ -37,6 +37,7 @@ const getEnvPath = (envTarget) => path.join(__dirname, `.env.${envTarget}`);
 module.exports = (env = {}) => {
   const {
     analyze: needAnalyze,
+    css: extractCss,
     target,
   } = env;
 
@@ -119,7 +120,7 @@ module.exports = (env = {}) => {
         const styleLoaderRule = {
           test: /\.s?css$/,
           use: [
-            (isProduction ? CssExtractPlugin.loader : 'style-loader'),
+            (isProduction || extractCss ? CssExtractPlugin.loader : 'style-loader'),
             {
               loader: 'css-loader',
               options: {

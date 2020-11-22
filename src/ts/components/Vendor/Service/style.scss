@@ -2,10 +2,19 @@
 
 .root {
   display: grid;
-  grid-template: repeat(3, auto) / 1fr auto;
+  grid-template: repeat(var(--row-amount), auto) / 1fr auto;
   justify-content: space-between;
+  align-items: baseline;
   gap: 8px;
-  font-size: 14px;
+  font-size: 13px;
+
+  &_brief {
+    --row-amount: 2;
+  }
+
+  &_full {
+    --row-amount: 3;
+  }
 }
 
 .title {
@@ -13,12 +22,13 @@
   margin-top: 0;
   margin-bottom: 0;
   font-weight: 500;
+  font-size: 14px;
 }
 
 .price {
   grid-area: 1 / 2 / 2 / 3;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   text-align: right;
 }
 
@@ -27,9 +37,10 @@
   color: utils.$color-gray;
 }
 
-.discount {
+.oldPrice {
   grid-area: 2 / 2 / 3 / 3;
   text-align: right;
+  text-decoration: line-through;
   color: utils.$color-gray;
 }
 
@@ -39,10 +50,6 @@
   grid-area: 3 / 1 / 4 / 3;
   display: inline;
   color: utils.$color-gray;
-
-  .isExtended & {
-    grid-column-end: 2;
-  }
 }
 
 .descriptionItem {
@@ -52,7 +59,4 @@
 .button {
   grid-area: 3 / 2 / 4 / 3;
   width: 5.5rem;
-  border: 2px solid utils.$color-pink;
-  padding: 8px;
-  color: utils.$color-pink;
 }

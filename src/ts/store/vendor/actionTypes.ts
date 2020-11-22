@@ -6,6 +6,7 @@ enum VendorActionNames {
   APPEND_VENDOR = 'APPEND_VENDOR',
   GET_VENDROS = 'GET_VENDROS',
   GET_VENDOR_BY_ID = 'GET_VENDOR_BY_ID',
+  SELECT_SERVICE = 'SELECT_SERVICE',
 }
 
 const GET_VENDORS_ACTIONS = {
@@ -20,7 +21,13 @@ const GET_VENDOR_BY_ID_ACTIONS = {
   [ProcessEnum.ERROR]: 'vendor:get-vendor-by-id-error',
 } as const;
 
+const SELECT_SERVICE_ACTIONS = {
+  CHECK: 'vendor:select-service:check',
+  UNCHECK: 'vendor:select-service:uncheck',
+} as const;
+
 export const VENDOR_ACTION_TYPES = {
   [VendorActionNames.GET_VENDROS]: GET_VENDORS_ACTIONS,
   [VendorActionNames.GET_VENDOR_BY_ID]: GET_VENDOR_BY_ID_ACTIONS,
+  [VendorActionNames.SELECT_SERVICE]: SELECT_SERVICE_ACTIONS,
 } as const;

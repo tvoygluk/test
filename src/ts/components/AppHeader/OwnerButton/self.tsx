@@ -27,3 +27,5 @@ export const AppHeaderOwnerButton: React.FC<IAppHeaderOwnerButtonProps> = ({ onC
     </>
   );
 };
+
+AppHeaderOwnerButton.displayName = 'AppHeader-OwnerButton';

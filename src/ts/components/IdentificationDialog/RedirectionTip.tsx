@@ -10,7 +10,7 @@ interface IRedirectionTipProps {
   onClick: () => void;
 }
 
-export const LoginDialogRedirectionTip: React.FC<IRedirectionTipProps> = ({
+export const IdentificationDialogRedirectionTip: React.FC<IRedirectionTipProps> = ({
   action,
   question,
   onClick,
@@ -22,3 +22,5 @@ export const LoginDialogRedirectionTip: React.FC<IRedirectionTipProps> = ({
     </p>
   );
 };
+
+IdentificationDialogRedirectionTip.displayName = 'IdentificationDialog-RedirectionTip';

@@ -1,7 +1,7 @@
 export { CallIcon } from './Call';
 export { ChevronIcon } from './Chevron';
 export { CloseIcon } from './Close';
-export type { IconContainerType } from './Container';
+export type { IconContainerType, IconProps } from './Container';
 export { FilterIcon } from './Filter';
 export { HomeIcon } from './Home';
 export { LikeIcon, DEFAULT_COLOR as LIKE_ICON_DEFAULT_COLOR } from './Like';

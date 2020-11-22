@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { LoginIcon } from 'common/icons';
+import { SignupIcon } from 'common/icons';
 import { LabelledButton } from 'common/LabelledButton';
 import type { FinallyComposedLabelledButtonPropsType } from 'common/LabelledButton';
+import style from 'components/MobileSidebar/Profile/style.scss';
 import { useModal } from 'store/modal';
 
 import { IdentificationDialog } from '../IdentificationDialog';
@@ -13,27 +14,25 @@ interface ILoginable {
 
 type LoginButtonProps = FinallyComposedLabelledButtonPropsType<ILoginable>;
 
-export const LoginButton: React.FC<LoginButtonProps> = ({
+export const SignupButton: React.FC<LoginButtonProps> = ({
   iconClassName,
   onLogin,
   ...propsRest
 }) => {
   const { modalActions } = useModal();
 
-  const noDefaultColor = Boolean(iconClassName);
-
   return (
     <LabelledButton
       {...propsRest}
-      label="Войти"
+      label="Зарегистрироваться"
       onClick={() => {
         modalActions.show(<IdentificationDialog
           onLogin={onLogin}
-          isLoginDialog
+          isLoginDialog={false}
         />);
       }}
     >
-      <LoginIcon className={iconClassName} noDefaultColor={noDefaultColor} />
+      <SignupIcon className={style.icon} />
     </LabelledButton>
   );
 };

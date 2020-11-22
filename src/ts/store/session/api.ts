@@ -10,6 +10,19 @@ const ENDPOINTS = {
   CREATE: `${SERVICE}/SessionCreate`,
 } as const;
 
+export interface ISesssionCheckSuccesResponseData {
+  customerName: string;
+}
+
+export interface ISesssionCreateSuccesResponseData {
+  approved: boolean;
+  code: string;
+  customerName: string;
+  phone: string;
+  timeoutSeconds: number;
+  token: string;
+}
+
 class SessionApi extends Api {
   public approve(payload) {
     return this.post(ENDPOINTS.APPROVE, payload);

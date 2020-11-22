@@ -33,7 +33,24 @@ $padding: (
   box-shadow: utils.$decor-boxShadow;
 
   &:focus-visible {
-    background-color: utils.$color-gray;
+    background-color: utils.$color-hovered-dark-button-background;
+    border-color: utils.$color-hovered-dark-button-background;
+  }
+
+  &:hover {
+    background-color: utils.$color-hovered-dark-button-background;
+    border-color: utils.$color-hovered-dark-button-background;
+  }
+
+  &:active {
+    background-color: utils.$color-black;
+  }
+
+  &:disabled {
+    color: utils.$color-disabled-dark-button-font;
+    background-color: utils.$color-disabled-dark-button-background;
+    border-color: utils.$color-disabled-dark-button-background;
+    cursor: not-allowed;
   }
 }
 
@@ -44,5 +61,27 @@ $padding: (
 
   &:focus-visible {
     border-color: utils.$color-gray;
+  }
+
+  &:hover {
+    border-color: utils.$color-gray;
+  }
+
+  &:disabled {
+    color: utils.$color-disabled-transparent-button-font;
+    border-color: utils.$color-disabled-transparent-button-border;
+    cursor: not-allowed;
+  }
+}
+
+.pink {
+  border: 2px solid utils.$color-pink;
+  padding: 8px;
+  font-size: 14px;
+  color: utils.$color-pink;
+
+  &.isPressed {
+    color: utils.$color-white;
+    background-color: utils.$color-pink;
   }
 }

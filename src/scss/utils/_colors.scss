@@ -7,6 +7,7 @@ $white: white;
 // black colors
 $black: black;
 $black-alpha-01: rgba(0, 0, 0, 0.1);
+$black-alpha-087: rgba(0, 0, 0, 0.87);
 
 // blackberry colors
 $blackberry: #014fce;
@@ -24,6 +25,9 @@ $blueberry-lightest: #e1f3fe;
 
 // gray colors
 $gray: #7c7c7c;
+$gray-alto: #d4d4d4;
+$gray-alto-light: #d8d8d8;
+$gray-dusty: #979797;
 $gray-light: #ababab; // userDropdownBorder
 $gray-lightest: #e6e3e3; // gray-headerBorder
 
@@ -46,7 +50,12 @@ $mint-light: #00d9bc;
 $mint-lightest: #dff9f5;
 
 // secondary level
+$disabled-dark-button-font: $gray;
+$disabled-dark-button-background: $gray-alto;
+$disabled-transparent-button-border: $gray-alto-light;
+$disabled-transparent-button-font: $gray-dusty;
 $header-border: $gray-lightest;
+$hovered-dark-button-background: $black-alpha-087;
 $input-border: $mercury-dark;
 $login-background: $mercury-light;
 $user-dropdown-border: $gray-light;

@@ -8,18 +8,12 @@ import { LogoImage } from 'ts/components/LogoImage';
 
 import style from './style.scss';
 
-type Props = {
+interface ILogoLinkProps {
   className?: string;
-};
-
-interface __FixMeRoutes__ {
-  HOME: string;
 }
 
-export const LogoLink: React.FC<Props> = ({ className }) => {
-  return (
-    <Link className={classNames(style.root, className)} to={(ROUTES as __FixMeRoutes__).HOME}>
-      <LogoImage />
-    </Link>
-  );
-};
+export const LogoLink: React.FC<ILogoLinkProps> = ({ className }) => (
+  <Link className={classNames(style.root, className)} to={ROUTES.HOME}>
+    <LogoImage />
+  </Link>
+);

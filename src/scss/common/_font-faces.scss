@@ -11,6 +11,7 @@ $fontWeights: (400, 500, 700,);
     font-family: "Helvetica Neue";
     font-weight: $weight;
     font-style: normal;
+    font-display: swap;
     src:
       get-url($weight, "woff2"),
       get-url($weight, "woff");

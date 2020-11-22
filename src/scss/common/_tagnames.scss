@@ -6,7 +6,7 @@
   box-sizing: inherit;
 }
 
-:focus {
+:focus:not(:focus-visible) {
   outline-style: none;
 }
 
@@ -40,6 +40,7 @@ body {
   // black colors
   --color_black: utils.$color-black;
   --color_black-alpha-01: utils.$color-black-alpha-01;
+  --color_black-alpha-087: utils.$color-black-alpha-087;
 
   // blackberry colors
   --color_blackberry: utils.$color-blackberry;
@@ -57,6 +58,9 @@ body {
 
   // gray colors
   --color_gray: utils.$color-gray;
+  --color_gray-alto: utils.$color-gray-alto;
+  --color_gray-alto-light: utils.$color-gray-alto-light;
+  --color_gray-dusty: utils.$color-gray-dusty;
   --color_gray-light: utils.$color-gray-light;
   --color_gray-lightest: utils.$color-gray-lightest;
 

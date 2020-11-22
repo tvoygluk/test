@@ -91,6 +91,32 @@ export const vendorReducer = (
       };
     }
 
+    case ACTIONS.SELECT_SERVICE.CHECK: {
+      if (state.data.current) {
+        return {
+          ...state,
+          data: {
+            ...state.data,
+            current: {
+              ...state.data.current,
+              services: state.data.current.services.map((service) => {
+                if (service.id === (action.payload as string)) {
+                  return {
+                    ...service,
+                    checked: true,
+                  };
+                }
+
+                return service;
+              }),
+            },
+          },
+        };
+      }
+
+      return state;
+    }
+
     default:
       return state;
   }

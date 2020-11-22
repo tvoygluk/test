@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import classNames from 'classnames';
 
+import { Button } from 'common/Button';
 import { LikeIcon, ScheduleIcon } from 'common/icons';
 import { Avatar } from 'common/Avatar';
-import { LabelledButton } from 'components/LabelledButton';
+import { LabelledButton } from 'common/LabelledButton';
 import { LoginButton } from 'components/LoginButton';
 import { useSession } from 'store/session';
 import { ProcessEnum } from 'ts/constants';
 
+import { AppHeaderUserBarSkeleton } from '../UserBarSkeleton';
 import { AppHeaderUserDropdownMenu } from '../UserDropdownMenu';
-import { AppHeaderUserBarSkeleton } from './Skeleton';
 
 import style from './style.scss';
 
@@ -20,6 +22,8 @@ export const AppHeaderUserBar: React.FC = () => {
   const isCheckRequested = session.process.check === ProcessEnum.REQUESTED;
   const isCheckSuccess = session.process.check === ProcessEnum.SUCCESS;
   const isCheckError = session.process.check === ProcessEnum.ERROR;
+
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   return (
     <nav className={style.root} role={isCheckRequested ? 'status' : undefined}>
@@ -48,11 +52,24 @@ export const AppHeaderUserBar: React.FC = () => {
             </LabelledButton>
 
             <div className={style.profile}>
-              <Avatar
-                className={style.profileAvatar}
-                userName={session.data.customerName}
-              />
-              <div className={style.dropdown}>
+              <Button
+                className={style.profileButton}
+                aria-expanded={isDropdownVisible}
+                onClick={() => {
+                  setIsDropdownVisible((prev) => !prev);
+                }}
+              >
+                <Avatar
+                  className={style.profileAvatar}
+                  userName={session.data.customerName}
+                />
+              </Button>
+
+              <div
+                className={classNames(style.dropdown, {
+                  [style.dropdown_visible]: isDropdownVisible,
+                })}
+              >
                 <AppHeaderUserDropdownMenu />
               </div>
             </div>
@@ -64,3 +81,5 @@ export const AppHeaderUserBar: React.FC = () => {
     </nav>
   );
 };
+
+AppHeaderUserBar.displayName = 'AppHeader-UserBar';

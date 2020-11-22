@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { IconButton } from 'common/IconButton';
 import { CloseIcon } from 'common/icons';
 import { useModal } from 'store/modal';
+import { useSession } from 'store/session';
 import { KEYBOARD_KEYS } from 'ts/constants';
 
 import style from './style.scss';
@@ -16,11 +17,13 @@ interface IProps {
 
 export const AppModal: React.FC<IProps> = ({ className }) => {
   const { modalState, modalActions } = useModal();
+  const { sessionActions } = useSession();
 
   const { content, isVisible } = modalState;
 
   const hideModal = useCallback(() => {
     modalActions.hide();
+    sessionActions.close();
   }, [modalActions]);
 
   useEffect(() => {

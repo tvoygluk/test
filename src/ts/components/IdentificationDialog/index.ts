@@ -1,0 +1,1 @@
+export { IdentificationDialog } from './self';

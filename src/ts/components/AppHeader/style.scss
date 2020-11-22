@@ -20,7 +20,7 @@ $сontentMinHeight-desktop: vars.$avatarSize;
   @media (max-width: utils.$breakpoint-sm-max) {
     grid-template-columns: auto 1fr;
     justify-content: start;
-    min-height: $contentMinHeight-mobile + $paddingY * 2;
+    min-height: 60px;
   }
 
   @media (min-width: utils.$breakpoint-md-min) {
@@ -70,4 +70,13 @@ $сontentMinHeight-desktop: vars.$avatarSize;
     display: block;
     margin-left: auto;
   }
+}
+
+.backIcon {
+  transform: rotate(90deg);
+  fill: utils.$color-pink;
+}
+
+.backLabel {
+  font-weight: 500;
 }

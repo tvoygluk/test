@@ -5,6 +5,10 @@ import type { ISessionData } from 'ts/types';
 import type { StateType } from '../rootReducer';
 import { SESSION_ACTION_TYPES as ACTIONS } from './actionTypes';
 import { sessionApi } from './api';
+import type {
+  ISesssionCheckSuccesResponseData,
+  ISesssionCreateSuccesResponseData,
+} from './api';
 
 // TODO: move to global types
 type SessionActionWithOneArg = (dispatch: Dispatch) => Promise<void>;
@@ -20,10 +24,6 @@ export interface ISessionActionCreator {
 export const sessionActionCreator: ISessionActionCreator = {
   approve(code, onLogin) {
     return async (dispatch, getState) => {
-      dispatch({
-        type: ACTIONS.APPROVE.REQUESTED,
-      });
-
       const { phone, token } = getState().session.data;
 
       const payload = {
@@ -78,9 +78,9 @@ export const sessionActionCreator: ISessionActionCreator = {
       };
 
       try {
-        const data = await sessionApi.check(requestPayload);
+        const data = await sessionApi.check(requestPayload) as ISesssionCheckSuccesResponseData;
 
-        if (data?.customerName) {
+        if (data.customerName) {
           dispatch({
             type: ACTIONS.CHECK.SUCCESS,
             payload: {
@@ -134,6 +134,10 @@ export const sessionActionCreator: ISessionActionCreator = {
   create(phone, customerName) {
     return async (dispatch) => {
       dispatch({
+        type: ACTIONS.APPROVE.INITIAL,
+      });
+
+      dispatch({
         type: ACTIONS.CREATE.REQUESTED,
       });
 
@@ -143,7 +147,7 @@ export const sessionActionCreator: ISessionActionCreator = {
       };
 
       try {
-        const data = await sessionApi.create(payload);
+        const data = await sessionApi.create(payload) as ISesssionCreateSuccesResponseData;
 
         globalThis.alert(`SMS code: ${data.code as string}`);
 

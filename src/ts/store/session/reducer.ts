@@ -1,9 +1,12 @@
-import type { Action } from 'redux';
-
 import { ProcessEnum } from 'ts/constants';
 import { ISessionData } from 'ts/types';
 
+import { IAction } from '../types';
 import { SESSION_ACTION_TYPES as ACTIONS } from './actionTypes';
+import type {
+  ISesssionCheckSuccesResponseData,
+  ISesssionCreateSuccesResponseData,
+} from './api';
 
 interface ISessionProcess {
   approve: ProcessEnum;
@@ -20,6 +23,7 @@ export interface ISessionState {
 const INITIAL_STATE = {
   data: {
     customerName: '',
+    messages: [],
     approved: false,
     code: null,
     phone: '',
@@ -36,11 +40,21 @@ const INITIAL_STATE = {
 
 export const sessionReducer = (
   prevState: ISessionState | undefined,
-  action: Action,
+  action: IAction,
 ): ISessionState => {
   const state = prevState ?? INITIAL_STATE;
 
   switch (action.type) {
+    case ACTIONS.APPROVE.INITIAL: {
+      return {
+        ...state,
+        process: {
+          ...state.process,
+          approve: ProcessEnum.INITIAL,
+        },
+      };
+    }
+
     case ACTIONS.APPROVE.REQUESTED: {
       return {
         ...state,
@@ -90,7 +104,7 @@ export const sessionReducer = (
         ...state,
         data: {
           ...state.data,
-          ...action.payload,
+          ...(action as IAction<ISesssionCheckSuccesResponseData>).payload,
           approved: true,
         },
         process: {
@@ -156,7 +170,7 @@ export const sessionReducer = (
         ...state,
         data: {
           ...state.data,
-          ...action.payload,
+          ...(action as IAction<ISesssionCreateSuccesResponseData>).payload,
         },
         process: {
           ...state.process,

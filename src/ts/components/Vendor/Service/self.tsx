@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import React from 'react';
+import classNames from 'classnames';
 
 import { CHARS } from 'ts/constants';
 import { Button } from 'common/Button';
@@ -10,7 +10,8 @@ import style from './style.scss';
 interface IVendorServiceProps {
   className?: string;
   data: IVendorService;
-  isExtended?: boolean;
+  isChecked?: boolean;
+  isBrief?: boolean;
 }
 
 const DURATION_MOCK = 30;
@@ -22,61 +23,78 @@ const formatDuration: VendorServiceDurationFormatter = (duration) => {
   const hours = Math.floor(duration / MINUTES_IN_HOUR);
   const minutesRest = duration - MINUTES_IN_HOUR * hours;
 
-  const minutesStr = `${minutesRest} мин`;
+  const minutesStr = `${minutesRest} мин.`;
 
   if (hours === 0) {
     return minutesStr;
   }
 
-  return `${hours} ч ${minutesStr}`;
+  return `${hours} ч. ${minutesStr}`;
 };
 
 export const VendorService: React.FC<IVendorServiceProps> = ({
   className,
   data,
-  isExtended = true,
+  isChecked = false,
+  isBrief = false,
 }) => {
   const {
-    description = [],
+    description,
     discount,
     duration = DURATION_MOCK,
     name,
     price,
   } = data;
 
+  const actualPrice = discount ? Math.floor((price * (100 - discount)) / 100) : price;
+
   return (
     <div
-      className={classNames(style.root, className, {
-        [style.isExtended]: isExtended,
-      })}
+      className={classNames(
+        style.root,
+        style[isBrief ? 'root_brief' : 'root_full'],
+        className,
+      )}
     >
       <p className={style.title}>{name}</p>
 
       <span className={style.price}>
-        {`${price} Р`}
+        {`${actualPrice} Р`}
       </span>
 
       <span className={style.duration}>{formatDuration(duration)}</span>
 
       {discount && (
-        <span className={style.discount}>
-          {`скидка ${discount}%`}
+        <span className={style.oldPrice}>
+          {`${price} Р`}
         </span>
       )}
 
-      <ul className={style.description}>
-        {description.map((it, i, arr) => (
-          <li key={it} className={style.descriptionItem}>
-            {`${it}${i === arr.length - 1 ? '' : ` ${CHARS.DOT_SEPARATOR} `}`}
-          </li>
-        ))}
-      </ul>
+      {!isBrief && (
+        <>
+          {description && (
+            <ul className={style.description}>
+              {description.map((it, i, arr) => (
+                <li key={it} className={style.descriptionItem}>
+                  <span>{it}</span>
 
-      {isExtended && (
-        <Button className={style.button}>
-          Выбрать
-        </Button>
+                  {i !== arr.length - 1 && (
+                    <span aria-hidden="true">
+                      {` ${CHARS.DOT_SEPARATOR} `}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <Button className={style.button} variant="pink" isPressed={isChecked}>
+            Выбрать
+          </Button>
+        </>
       )}
     </div>
   );
 };
+
+VendorService.displayName = 'Vendor-Service';

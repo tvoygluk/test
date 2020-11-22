@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 
 import { IconButton } from 'common/IconButton';
-import { ChevronIcon, ProfileIcon, SignupIcon } from 'common/icons';
-import { LabelledButton } from 'components/LabelledButton';
+import { ChevronIcon, ProfileIcon } from 'common/icons';
+import { LabelledButton } from 'common/LabelledButton';
 import { LoginButton } from 'components/LoginButton';
+import { SignupButton } from 'components/SignupButton';
 import { LogoutButton } from 'components/LogoutButton';
 import { Avatar } from 'common/Avatar';
 
@@ -98,13 +99,13 @@ export const MobileSidebarProfile: React.FC<IMobileSidebarProfileProps> = ({
                     setIsProfileExpanded(false);
                   }}
                 />
-                <LabelledButton
-                  className={style.dropdownButton}
+                <SignupButton
+                  iconClassName={style.icon}
                   labelClassName={style.dropdownLegend}
-                  label="Зарегистрироваться"
-                >
-                  <SignupIcon className={style.icon} />
-                </LabelledButton>
+                  onLogin={() => {
+                    setIsProfileExpanded(false);
+                  }}
+                />
               </>
             )
           }
@@ -113,3 +114,5 @@ export const MobileSidebarProfile: React.FC<IMobileSidebarProfileProps> = ({
     </div>
   );
 };
+
+MobileSidebarProfile.displayName = 'MobileSidebar-Profile';

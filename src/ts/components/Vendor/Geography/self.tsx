@@ -37,3 +37,5 @@ export const VendorGeography: React.FC<IVendorGeographyProps> = ({ className, da
     </div>
   );
 };
+
+VendorGeography.displayName = 'Vendor-Geography';

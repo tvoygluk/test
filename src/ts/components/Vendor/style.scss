@@ -4,104 +4,102 @@
   border-bottom: 1px solid utils.$color-black-alpha-01;
 }
 
+._row {
+  composes: xPadded from "./helpers.scss";
+  composes: _bordered;
+}
+
 .root {
   display: flex;
   flex-direction: column;
   width: 300px;
   overflow: hidden;
   border-radius: 10px;
+  padding-bottom: 5px;
   box-shadow: 0 5px 7px 0 utils.$color-black-alpha-01;
 }
 
 .header {
-  composes: _bordered;
+  composes: _row;
 
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding: 16px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .title {
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
   width: 100%;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .geography {
-  composes: xPadded from "./helpers.scss";
-  composes: _bordered;
+  composes: _row;
 }
 
-.services {
-  composes: xPadded from "./helpers.scss";
-}
+.caption {
+  composes: _row;
 
-.servicesCaption {
   @include utils.text-size-caption();
 
-  margin-top: 1.5rem;
+  margin-top: 0;
   margin-bottom: 0;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   font-weight: 700;
   text-transform: uppercase;
 }
 
-._service {
-  padding-top: 18px;
-  padding-bottom: 18px;
-}
-
 .service {
-  composes: xPadded from "./helpers.scss";
-  composes: _bordered _service;
-}
+  composes: _row;
 
-.lastService {
-  composes: xPadded from "./helpers.scss";
-  composes: _service;
+  padding-top: 1.125rem;
+  padding-bottom: 1.125rem;
 }
 
 .image {
   width: 100%;
   height: 165px;
-  object-fit: cover;
 }
 
-.home {
-  margin-right: 16px;
-}
-
-.like {
-  margin-right: 16px;
+.headerIcon {
+  margin-right: 1rem;
 }
 
 .list {
   composes: list from "~scss/scaffold.scss";
-  composes: xMarged from "./helpers.scss";
 }
 
 .reviews {
   margin-right: auto;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .stars {
   display: flex;
   align-items: center;
-  margin-right: 12px;
+  margin-right: 0.75rem;
 }
 
 .starCount {
-  margin-right: 4px;
+  margin-right: 0.25rem;
   font-weight: 700;
-  font-size: 20px;
-  line-height: 20px;
+  font-size: 1.25rem;
+  line-height: 1;
   color: utils.$color-gold;
 }
 
 .link {
   text-decoration: none;
   color: inherit;
+}
+
+.appointmentButton {
+  align-self: center;
+  margin-top: 1.5rem;
+  width: 290px;
 }

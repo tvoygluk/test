@@ -21,7 +21,7 @@ $loginBg: utils.$color-login-background;
 }
 
 .form {
-  composes: column from "./helpers.scss";
+  composes: column from "helpers.scss";
 
   padding-left: 1.75rem;
   padding-right: 1.75rem;
@@ -34,7 +34,7 @@ $loginBg: utils.$color-login-background;
 }
 
 .caption {
-  composes: caption from "./helpers.scss";
+  composes: caption from "helpers.scss";
 }
 
 .captionTip {
@@ -87,5 +87,6 @@ $loginBg: utils.$color-login-background;
 
 .timerValue {
   font-size: 1.5rem;
+  font-weight: 600;
   color: $black;
 }

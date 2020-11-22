@@ -60,3 +60,5 @@ export const DiscountsItem: React.FC<IDiscountsItemProps> = ({ className, discou
     </li>
   );
 };
+
+DiscountsItem.displayName = 'Discounts-Item';

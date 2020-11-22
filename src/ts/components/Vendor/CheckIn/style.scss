@@ -9,8 +9,6 @@ $time-semigutter-ver: $time-gutter-ver / 2;
 .root {
   display: flex;
   flex-direction: column;
-  padding-top: 24px;
-  padding-bottom: 6px;
 }
 
 .header {
@@ -18,10 +16,7 @@ $time-semigutter-ver: $time-gutter-ver / 2;
 
   display: flex;
   justify-content: center;
-}
-
-.button {
-  width: 290px;
+  padding-top: 1.5rem;
 }
 
 .toggle {
@@ -36,6 +31,10 @@ $time-semigutter-ver: $time-gutter-ver / 2;
 
 .chevron {
   align-self: center;
+
+  .isExpanded & {
+    transform: rotate(180deg);
+  }
 }
 
 .time {
@@ -51,10 +50,12 @@ $time-semigutter-ver: $time-gutter-ver / 2;
   box-shadow: 0 5px 5px 0 utils.$color-black-alpha-01;
 }
 
-.collapsible {
+.timeGrid {
   align-self: center;
   display: none;
-  margin-top: 26px;
+  margin-top: 24px;
+  width: ($time-width + $time-gutter-hor) * 4;
+  padding: $time-semigutter-ver $time-semigutter-hor;
 
   .isExpanded & {
     display: block;
@@ -72,10 +73,4 @@ $time-semigutter-ver: $time-gutter-ver / 2;
   display: flex;
   flex-wrap: wrap;
   margin: (-$time-semigutter-ver) (-$time-semigutter-hor);
-}
-
-.timeGrid {
-  margin-bottom: 22px;
-  width: ($time-width + $time-gutter-hor) * 4;
-  padding: $time-semigutter-ver $time-semigutter-hor;
 }

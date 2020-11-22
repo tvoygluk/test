@@ -1,17 +1,5 @@
 @use "../variables" as vars;
 
-$rectangleWidth: 120px;
-
-@keyframes skeletonBlink {
-  from {
-    background-position-x: 0;
-  }
-
-  to {
-    background-position-x: $rectangleWidth;
-  }
-}
-
 .root {
   display: grid;
   grid-auto-flow: column;
@@ -20,6 +8,9 @@ $rectangleWidth: 120px;
 
 .profile {
   position: relative;
+}
+
+.profileButton {
   display: flex;
   align-items: center;
 }
@@ -32,7 +23,7 @@ $rectangleWidth: 120px;
 .dropdown {
   display: none;
 
-  .profile:hover & {
+  &_visible {
     position: absolute;
     z-index: 1;
     top: calc(100% - 1px);
@@ -43,31 +34,4 @@ $rectangleWidth: 120px;
 
 .loginButtonLabel {
   composes: buttonLabel from "../helpers.scss";
-}
-
-.skeleton {
-  align-self: center;
-  background-image: repeating-linear-gradient(
-    90deg,
-    #dcdcdc 0,
-    white $rectangleWidth / 2,
-    #dcdcdc $rectangleWidth,
-  );
-  background-position-x: 0;
-  background-size: $rectangleWidth;
-  animation: skeletonBlink 1s infinite ease;
-}
-
-.skeletonRect {
-  composes: skeleton;
-  width: $rectangleWidth;
-  height: 24px;
-  border-radius: 4px;
-}
-
-.skeletonCircle {
-  composes: skeleton;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
 }

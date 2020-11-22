@@ -11,3 +11,5 @@ export const AppHeaderUserBarSkeleton: React.FC = () => {
     </>
   );
 };
+
+AppHeaderUserBarSkeleton.displayName = 'AppHeader-UserBarSkeleton';

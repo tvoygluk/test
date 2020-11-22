@@ -8,6 +8,7 @@ enum SessionActionNames {
 }
 
 const APPROVE_ACTIONS = {
+  [ProcessEnum.INITIAL]: 'session:approve-initialized',
   [ProcessEnum.REQUESTED]: 'session:approve-requested',
   [ProcessEnum.SUCCESS]: 'session:approve-success',
   [ProcessEnum.ERROR]: 'session:approve-error',

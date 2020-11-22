@@ -2,12 +2,15 @@ import React from 'react';
 
 import style from './style.scss';
 
-interface ILoginDialogHeaderProps {
+interface IIdentificationDialogHeaderProps {
   caption: string;
   captionTip: string;
 }
 
-export const LoginDialogHeader: React.FC<ILoginDialogHeaderProps> = ({ caption, captionTip }) => {
+export const IdentificationDialogHeader: React.FC<IIdentificationDialogHeaderProps> = ({
+  caption,
+  captionTip,
+}) => {
   return (
     <div className={style.header}>
       <p className={style.caption}>{caption}</p>
@@ -15,3 +18,5 @@ export const LoginDialogHeader: React.FC<ILoginDialogHeaderProps> = ({ caption, 
     </div>
   );
 };
+
+IdentificationDialogHeader.displayName = 'IdentificationDialog-Header';

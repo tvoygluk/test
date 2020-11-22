@@ -14,12 +14,15 @@ export const PageSwitcher: React.FC = () => {
         <Route path={ROUTES.HOME} exact>
           <LazyHomePage />
         </Route>
+
         <Route path={ROUTES.STORYBOOK} exact>
           <LazyStoryBookPage />
         </Route>
+
         <Route path={ROUTES.VENDOR_ITEM}>
           <LazyVendorPage />
         </Route>
+
         <Route>
           <ErrorPage />
         </Route>

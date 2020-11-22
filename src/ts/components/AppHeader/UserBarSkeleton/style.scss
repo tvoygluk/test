@@ -1,0 +1,40 @@
+@use "../variables" as vars;
+
+@keyframes skeletonBlink {
+  from {
+    background-position-x: 0;
+  }
+
+  to {
+    background-position-x: vars.$rectangleWidth;
+  }
+}
+
+._base {
+  align-self: center;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #dcdcdc 0,
+    white vars.$rectangleWidth / 2,
+    #dcdcdc vars.$rectangleWidth,
+  );
+  background-position-x: 0;
+  background-size: vars.$rectangleWidth;
+  animation: skeletonBlink 1s infinite ease;
+}
+
+.rect {
+  composes: _base;
+
+  width: vars.$rectangleWidth;
+  height: 24px;
+  border-radius: 4px;
+}
+
+.circle {
+  composes: _base;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}

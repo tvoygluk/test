@@ -2,7 +2,7 @@ import React from 'react';
 
 import { CallIcon, MessageIcon } from 'common/icons';
 import type { IconProps } from 'common/icons';
-import { LabelledButton } from 'components/LabelledButton';
+import { LabelledButton } from 'common/LabelledButton';
 
 import style from './style.scss';
 
@@ -46,3 +46,5 @@ export const MobileSidebarSupport: React.FC<IMobileSidebarSupportProps> = ({
     </div>
   );
 };
+
+MobileSidebarSupport.displayName = 'MobileSidebar-Support';
